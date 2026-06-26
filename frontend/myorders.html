@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Orders | Ananya Aura</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#0d0d0d;
+color:white;
+min-height:100vh;
+padding-bottom:95px;
+}
+
+button,
+input{
+font:inherit;
+}
+
+button{
+border:none;
+cursor:pointer;
+transition:.25s;
+}
+
+.page-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:18px;
+padding:15px 20px;
+background:#111;
+border-bottom:2px solid #d4af37;
+position:sticky;
+top:0;
+z-index:20;
+}
+
+.logo-section{
+display:flex;
+align-items:center;
+gap:12px;
+}
+
+.logo{
+width:64px;
+height:64px;
+border-radius:50%;
+object-fit:cover;
+border:3px solid #d4af37;
+box-shadow:0 0 10px rgba(212,175,55,.5);
+}
+
+.brand h1{
+color:#d4af37;
+font-size:23px;
+letter-spacing:1.5px;
+}
+
+.brand p{
+color:#ccc;
+font-size:12px;
+}
+
+.header-link{
+width:52px;
+height:52px;
+display:flex;
+align-items:center;
+justify-content:center;
+border:1px solid #d4af37;
+border-radius:50%;
+color:#d4af37;
+background:#111;
+text-decoration:none;
+font-size:23px;
+}
+
+.container{
+max-width:1180px;
+margin:auto;
+padding:26px 18px 0;
+}
+
+.hero{
+background:linear-gradient(rgba(0,0,0,.72),rgba(0,0,0,.78)),url("bg.jpeg");
+background-size:cover;
+background-position:center;
+border:1px solid #d4af37;
+border-radius:20px;
+padding:34px 24px;
+margin-bottom:20px;
+}
+
+.hero h2{
+color:#d4af37;
+font-size:34px;
+line-height:1.2;
+margin-bottom:8px;
+}
+
+.hero p{
+color:#e6e6e6;
+line-height:1.7;
+max-width:620px;
+}
+
+.toolbar{
+display:grid;
+grid-template-columns:1fr auto;
+gap:12px;
+align-items:center;
+margin:20px 0 16px;
+}
+
+.search-box{
+display:flex;
+align-items:center;
+gap:10px;
+background:#111;
+border:1px solid #d4af37;
+border-radius:40px;
+padding:5px 6px 5px 16px;
+box-shadow:0 0 0 rgba(212,175,55,0);
+transition:.25s;
+}
+
+.search-box:focus-within{
+box-shadow:0 0 12px rgba(212,175,55,.45);
+}
+
+.search-box i{
+color:#d4af37;
+font-size:18px;
+}
+
+.search-box input{
+flex:1;
+min-width:0;
+border:none;
+outline:none;
+background:transparent;
+color:white;
+padding:12px 0;
+font-size:16px;
+}
+
+.search-actions{
+display:flex;
+gap:8px;
+}
+
+.gold-btn,
+.dark-btn{
+min-height:44px;
+padding:0 16px;
+border-radius:24px;
+font-weight:700;
+}
+
+.gold-btn{
+background:#d4af37;
+color:black;
+}
+
+.dark-btn{
+background:#242424;
+color:white;
+border:1px solid #3a3a3a;
+}
+
+.gold-btn:hover,
+.dark-btn:hover,
+.filter-btn:hover,
+.card-btn:hover{
+transform:translateY(-2px);
+}
+
+.filters{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+margin-bottom:20px;
+}
+
+.filter-btn{
+background:#1a1a1a;
+color:white;
+border:1px solid #333;
+border-radius:12px;
+padding:11px 16px;
+font-weight:600;
+}
+
+.filter-btn.active{
+background:#d4af37;
+color:black;
+border-color:#d4af37;
+}
+
+.summary-row{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:12px;
+color:#bbb;
+margin-bottom:14px;
+}
+
+.summary-row strong{
+color:#d4af37;
+}
+
+.orders{
+display:grid;
+grid-template-columns:1fr;
+gap:18px;
+}
+
+.order-card{
+background:#181818;
+border:1px solid #333;
+border-radius:15px;
+padding:20px;
+transition:.25s;
+}
+
+.order-card:hover{
+transform:translateY(-3px);
+border-color:#d4af37;
+box-shadow:0 0 15px rgba(212,175,55,.22);
+}
+
+.order-top{
+display:flex;
+justify-content:space-between;
+gap:15px;
+align-items:flex-start;
+margin-bottom:16px;
+}
+
+.order-id{
+color:#d4af37;
+font-size:20px;
+font-weight:700;
+}
+
+.order-meta{
+display:flex;
+gap:12px;
+flex-wrap:wrap;
+margin-top:8px;
+color:#bbb;
+font-size:14px;
+}
+
+.status{
+white-space:nowrap;
+padding:8px 14px;
+border-radius:999px;
+font-size:13px;
+font-weight:800;
+color:white;
+}
+
+.confirmed{background:#ff9800;color:#111;}
+.shipped{background:#2196f3;}
+.delivered{background:#4caf50;}
+.cancelled{background:#e53935;}
+.returned{background:#795548;}
+
+.order-grid{
+display:grid;
+grid-template-columns:1.25fr .75fr;
+gap:16px;
+align-items:start;
+}
+
+.items{
+display:flex;
+flex-direction:column;
+gap:12px;
+}
+
+.item{
+display:flex;
+gap:13px;
+align-items:center;
+background:#222;
+border-radius:12px;
+padding:12px;
+}
+
+.item img{
+width:82px;
+height:82px;
+object-fit:cover;
+border-radius:10px;
+background:#111;
+}
+
+.item h3{
+font-size:16px;
+margin-bottom:5px;
+}
+
+.item p{
+color:#aaa;
+font-size:14px;
+}
+
+.price{
+color:#d4af37;
+font-weight:800;
+}
+
+.details-panel{
+background:#202020;
+border:1px solid #333;
+border-radius:12px;
+padding:15px;
+}
+
+.detail-line{
+display:flex;
+justify-content:space-between;
+gap:12px;
+padding:9px 0;
+border-bottom:1px solid #333;
+color:#bbb;
+}
+
+.detail-line:last-child{
+border-bottom:none;
+}
+
+.detail-line b{
+color:white;
+text-align:right;
+}
+
+.actions{
+display:grid;
+grid-template-columns:repeat(5,1fr);
+grid-template-columns:repeat(6,1fr);
+gap:10px;
+margin-top:16px;
+}
+
+.card-btn{
+min-height:44px;
+border-radius:10px;
+font-weight:800;
+padding:10px;
+}
+
+.view{background:#d4af37;color:black;}
+.track{background:#03a9f4;color:white;}
+.buy{background:#4caf50;color:white;}
+.invoice{background:#8e44ad;color:white;}
+.cancel{background:#e53935;color:white;}
+.card-btn:disabled{
+opacity:.45;
+cursor:not-allowed;
+transform:none;
+}
+
+.empty-state,
+.loading-state{
+display:none;
+text-align:center;
+background:#181818;
+border:1px solid #333;
+border-radius:18px;
+padding:48px 20px;
+}
+
+.empty-state i,
+.loading-state i{
+display:block;
+color:#d4af37;
+font-size:52px;
+margin-bottom:15px;
+}
+
+.empty-state h2,
+.loading-state h2{
+color:#d4af37;
+margin-bottom:10px;
+}
+
+.empty-state p{
+color:#aaa;
+line-height:1.7;
+margin-bottom:20px;
+}
+
+.footer-note{
+margin-top:34px;
+padding:22px;
+background:#181818;
+border:1px solid #333;
+border-radius:15px;
+text-align:center;
+}
+
+.footer-note h2{
+color:#d4af37;
+margin-bottom:10px;
+}
+
+.footer-note p{
+color:#aaa;
+line-height:1.7;
+}
+
+.bottom-nav{
+position:fixed;
+bottom:0;
+left:0;
+width:100%;
+background:#111;
+border-top:2px solid #d4af37;
+display:flex;
+justify-content:space-around;
+padding:12px 0;
+z-index:30;
+}
+
+.bottom-nav a{
+text-decoration:none;
+color:#d4af37;
+display:flex;
+flex-direction:column;
+align-items:center;
+font-size:13px;
+}
+
+.bottom-nav a.active,
+.bottom-nav a:hover{
+color:white;
+}
+
+.bottom-nav i{
+font-size:22px;
+margin-bottom:4px;
+}
+
+.modal-backdrop{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.78);
+display:none;
+align-items:center;
+justify-content:center;
+padding:18px;
+z-index:60;
+}
+
+.modal{
+width:min(680px,100%);
+max-height:88vh;
+overflow:auto;
+background:#181818;
+border:1px solid #d4af37;
+border-radius:18px;
+padding:22px;
+box-shadow:0 0 25px rgba(212,175,55,.2);
+}
+
+.modal-head{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:12px;
+margin-bottom:16px;
+}
+
+.modal h2{
+color:#d4af37;
+}
+
+.icon-btn{
+width:42px;
+height:42px;
+border-radius:50%;
+background:#222;
+color:white;
+font-size:20px;
+}
+
+.toast{
+position:fixed;
+right:18px;
+bottom:100px;
+background:#d4af37;
+color:black;
+padding:12px 16px;
+border-radius:10px;
+font-weight:800;
+opacity:0;
+pointer-events:none;
+transform:translateY(10px);
+transition:.25s;
+z-index:70;
+}
+
+.toast.show{
+opacity:1;
+transform:translateY(0);
+}
+
+@media(max-width:850px){
+.toolbar,
+.order-grid{
+grid-template-columns:1fr;
+}
+
+.actions{
+grid-template-columns:repeat(2,1fr);
+}
+}
+
+@media(max-width:620px){
+.page-header{
+align-items:flex-start;
+}
+
+.brand h1{
+font-size:17px;
+}
+
+.logo{
+width:55px;
+height:55px;
+}
+
+.hero h2{
+font-size:26px;
+}
+
+.search-box{
+align-items:stretch;
+border-radius:18px;
+padding:10px;
+}
+
+.search-actions{
+width:100%;
+}
+
+.gold-btn,
+.dark-btn{
+flex:1;
+padding:0 10px;
+}
+
+.order-top{
+flex-direction:column;
+}
+
+.item{
+align-items:flex-start;
+}
+
+.item img{
+width:70px;
+height:70px;
+}
+
+.actions{
+grid-template-columns:1fr;
+}
+
+.summary-row{
+flex-direction:column;
+align-items:flex-start;
+}
+}
+</style>
+</head>
+
+<body>
+<header class="page-header">
+<div class="logo-section">
+<img src="ananya.jpeg" alt="Ananya Aura" class="logo">
+<div class="brand">
+<h1>ANANYA AURA JEWELLERY</h1>
+<p>Timeless Elegance</p>
+</div>
+</div>
+<a href="home.html" class="header-link" title="Continue shopping">
+<i class="bi bi-bag-heart"></i>
+</a>
+</header>
+
+<main class="container">
+<section class="hero">
+<h2>My Orders</h2>
+<p>Search your orders, track delivery, download invoices, cancel pending orders, or buy your favourite jewellery again.</p>
+</section>
+
+<section class="toolbar">
+<div class="search-box">
+<i class="bi bi-search"></i>
+<input type="text" id="searchOrder" placeholder="Search by order ID, name, phone, product, payment..." autocomplete="off">
+<div class="search-actions">
+<button class="gold-btn" id="searchBtn">Search</button>
+<button class="dark-btn" id="clearBtn">Clear</button>
+</div>
+</div>
+<button class="dark-btn" id="refreshBtn"><i class="bi bi-arrow-clockwise"></i> Refresh</button>
+</section>
+
+<section class="filters" aria-label="Order filters">
+<button class="filter-btn active" data-status="all">All</button>
+<button class="filter-btn" data-status="Confirmed">Confirmed</button>
+<button class="filter-btn" data-status="Shipped">Shipped</button>
+<button class="filter-btn" data-status="Delivered">Delivered</button>
+<button class="filter-btn" data-status="Cancelled">Cancelled</button>
+<button class="filter-btn" data-status="Returned">Returned</button>
+</section>
+
+<div class="summary-row">
+<span id="resultCount">Showing 0 orders</span>
+<span>Need something new? <strong onclick="location.href='home.html'" style="cursor:pointer;">Continue Shopping</strong></span>
+</div>
+
+<section id="loading" class="loading-state">
+<i class="bi bi-hourglass-split"></i>
+<h2>Loading Orders...</h2>
+</section>
+
+<section id="ordersContainer" class="orders"></section>
+
+<section id="emptyOrders" class="empty-state">
+<i class="bi bi-bag-x"></i>
+<h2>No Orders Found</h2>
+<p id="emptyText">Looks like you have not placed any orders yet.</p>
+<button class="gold-btn" onclick="location.href='home.html'">Continue Shopping</button>
+</section>
+
+<section class="footer-note">
+<h2>Thank You</h2>
+<p>Thank you for shopping with <b>Ananya Aura Jewellery.</b> Your trust means everything to us.</p>
+</section>
+</main>
+
+<nav class="bottom-nav">
+<a href="home.html">
+<i class="bi bi-house-fill"></i>
+<span>Home</span>
+</a>
+<a href="cart.html">
+<i class="bi bi-cart-fill"></i>
+<span>Cart</span>
+</a>
+<a href="myorders.html" class="active">
+<i class="bi bi-box-seam"></i>
+<span>Orders</span>
+</a>
+<a href="profile.html">
+<i class="bi bi-person-fill"></i>
+<span>Profile</span>
+</a>
+</nav>
+
+<div class="modal-backdrop" id="orderModal" role="dialog" aria-modal="true">
+<div class="modal">
+<div class="modal-head">
+<h2 id="modalTitle">Order Details</h2>
+<button class="icon-btn" id="closeModal" title="Close"><i class="bi bi-x-lg"></i></button>
+</div>
+<div id="modalContent"></div>
+</div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+let allOrders = [];
+let activeStatus = "all";
+const API_BASE_URL = "http://127.0.0.1:8000";
+const currentUserId = localStorage.getItem("user_id");
+
+const ordersContainer = document.getElementById("ordersContainer");
+const emptyOrders = document.getElementById("emptyOrders");
+const emptyText = document.getElementById("emptyText");
+const loading = document.getElementById("loading");
+const searchInput = document.getElementById("searchOrder");
+const resultCount = document.getElementById("resultCount");
+const orderModal = document.getElementById("orderModal");
+const modalContent = document.getElementById("modalContent");
+const modalTitle = document.getElementById("modalTitle");
+const toast = document.getElementById("toast");
+
+const localImageMap = {
+"maang tikka":"Maang Tikka.jpeg",
+"traditional maang tikka":"Maang Tikka1.jpeg",
+"bridal maang tikka":"Maang Tikka2.jpeg",
+"matha patti":"Matha Patti.jpeg",
+"traditional matha patti":"Matha Patti1.jpeg",
+"bridal matha patti":"Matha Patti2.jpeg",
+"headband tiara":"Headband_Tiara.jpeg",
+"royal tiara":"Headband_Tiara1.jpeg",
+"earrings":"Earrings.jpeg",
+"jhumka earrings":"Earrings1.jpeg",
+"diamond earrings":"Earrings2.jpeg",
+"gold earrings":"Earrings3.jpeg",
+"pearl earrings":"Earrings4.jpeg",
+"stud earrings":"Earrings5.jpeg",
+"nose pin":"Nose Pin.jpeg",
+"diamond nose pin":"Nose Pin1.jpeg",
+"gold nose pin":"Nose Pin2.jpeg",
+"nose ring":"Nose Ring.jpeg",
+"choker":"Choker.jpeg",
+"bridal choker":"Choker1.jpeg",
+"necklace":"Necklace.jpeg",
+"pendant":"Pendant.jpeg",
+"bajuband":"Bajuband.jpeg",
+"bangles":"Bangles.jpeg",
+"gold bangles":"Bangles1.jpeg",
+"bridal bangles":"Bangles2.jpeg",
+"designer bangles":"Bangles3.jpeg",
+"bracelet":"Bracelets.jpeg",
+"ring":"Ring.jpeg",
+"diamond ring":"Ring1.jpeg",
+"gold ring":"Ring2.jpeg",
+"designer ring":"Ring3.jpeg",
+"vaddanam":"Vaddanam.jpeg",
+"bridal vaddanam":"Vaddanam1.jpeg",
+"anklet":"Anklet.jpeg",
+"silver anklet":"Anklet1.jpeg",
+"designer anklet":"Anklet2.jpeg",
+"toe ring":"Toe Ring.jpeg",
+"silver toe ring":"Toe Ring1.jpeg",
+"everyday chain":"Everyday Chains.jpeg",
+"gold chain":"Everyday Chains1.jpeg",
+"designer chain":"Everyday Chains2.jpeg",
+"pendant necklace":"Pendant Necklaces.jpeg",
+"gold pendant necklace":"Pendant Necklaces1.jpeg",
+"designer pendant necklace":"Pendant Necklaces2.jpeg",
+"brooch":"Brooch.jpeg",
+"royal brooch":"Brooch1.jpeg",
+"designer brooch":"Brooch2.jpeg",
+"sleek cuff":"sleekcuff.jpeg",
+"link bracelet":"Link Bracelets.jpeg",
+"gold link bracelet":"Link Bracelets1.jpeg",
+"beaded bracelet":"Beaded Bracelets.jpeg",
+"designer beaded bracelet":"Beaded Bracelets1.jpeg",
+"sleek band":"sleekband.jpeg",
+"waist chain":"Waist Chains.jpeg",
+"rolex watch":"rolex watch.jpeg",
+"luxury watch":"watch.jpeg",
+"titan watch":"titan watch.jpeg",
+"carlton watch":"carliton_watch.jpeg"
+};
+
+function money(value){
+return "Rs " + asNumber(value).toLocaleString("en-IN");
+}
+
+function asNumber(value){
+return Number(String(value || 0).replace(/[^\d.]/g,"")) || 0;
+}
+
+function clean(value, fallback){
+return value === undefined || value === null || value === "" ? fallback : value;
+}
+
+function statusClass(status){
+return String(status || "Confirmed").toLowerCase().replace(/\s+/g,"-");
+}
+
+function localImageFor(item){
+const rawImage = clean(item.image, "");
+const nameKey = String(item.name || "").toLowerCase().trim();
+
+if(rawImage && !/^https?:\/\//i.test(rawImage)){
+return rawImage;
+}
+
+return localImageMap[nameKey] || "ananya.jpeg";
+}
+
+function imageTag(item, altText){
+const src = localImageFor(item || {});
+return `<img src="${src}" alt="${altText || item.name || "Ananya Aura"}" onerror="this.onerror=null;this.src='ananya.jpeg';">`;
+}
+
+function getOverrides(){
+return JSON.parse(localStorage.getItem("orderStatusOverrides")) || {};
+}
+
+function setOverride(orderId, status){
+const overrides = getOverrides();
+overrides[orderId] = status;
+localStorage.setItem("orderStatusOverrides", JSON.stringify(overrides));
+}
+
+async function saveOrderStatus(orderId, status){
+const response = await fetch(`${API_BASE_URL}/order-status/${orderId}/`, {
+method: "POST",
+headers: {"Content-Type": "application/json"},
+body: JSON.stringify({
+user_id: currentUserId,
+status: status
+})
+});
+const data = await response.json();
+if(!data.success){
+throw new Error(data.message || "Status update failed");
+}
+return data;
+}
+
+function getLocalOrders(){
+return (JSON.parse(localStorage.getItem("orders")) || [])
+.filter(order => order.user_id && String(order.user_id) === String(currentUserId))
+.map(order => normalizeOrder(order, "local"));
+}
+
+function normalizeOrder(order, source){
+const address = order.address || {};
+const items = Array.isArray(order.items) ? order.items : [];
+const id = order.orderId || order.order_id || order.id || "ORD" + Date.now();
+const overrides = getOverrides();
+
+return {
+source,
+orderId:id,
+customerName:clean(order.customer_name || order.customerName || address.name, "Ananya Aura Customer"),
+phone:clean(order.phone || address.phone, "Not available"),
+city:clean(order.city || address.city, ""),
+state:clean(order.state || address.state, ""),
+pincode:clean(order.pincode || address.pincode, ""),
+fullAddress:clean(order.fullAddress || address.address || order.address, ""),
+payment:clean(order.payment, "COD"),
+date:clean(order.date || order.order_date, ""),
+deliveryDate:clean(order.deliveryDate, "3 - 5 Days"),
+status:overrides[id] || clean(order.status, "Confirmed"),
+total:clean(order.total || order.total_amount, 0),
+items:items.map(item => ({
+name:clean(item.name, "Jewellery item"),
+price:Number(item.price) || 0,
+qty:Number(item.qty) || 1,
+image:clean(item.image, "")
+}))
+};
+}
+
+function makeTrackableOrder(order){
+return {
+orderId:order.orderId,
+address:{
+name:order.customerName,
+phone:order.phone,
+house:"",
+landmark:"",
+address:order.fullAddress,
+city:order.city,
+state:order.state,
+pincode:order.pincode
+},
+payment:order.payment,
+deliveryDate:order.deliveryDate,
+status:order.status,
+total:order.total,
+items:order.items.length ? order.items : [{
+name:"Ananya Aura Jewellery Order",
+price:Number(String(order.total).replace(/[^\d.]/g,"")) || 0,
+qty:1,
+image:"ananya.jpeg"
+}]
+};
+}
+
+function mergeOrders(localOrders, backendOrders){
+const map = new Map();
+backendOrders.forEach(order => map.set(order.orderId, order));
+localOrders.forEach(order => map.set(order.orderId, {...map.get(order.orderId), ...order, source:"local"}));
+return Array.from(map.values()).reverse();
+}
+
+async function loadAllOrders(){
+if(!currentUserId){
+alert("Please login first");
+window.location.href = "login.html";
+return;
+}
+
+loading.style.display = "block";
+ordersContainer.innerHTML = "";
+emptyOrders.style.display = "none";
+
+const localOrders = getLocalOrders();
+let backendOrders = [];
+
+try{
+const response = await fetch(`${API_BASE_URL}/orders/${currentUserId}/`);
+if(response.ok){
+const data = await response.json();
+backendOrders = data.map(order => normalizeOrder(order, "backend"));
+}
+}catch(error){
+console.log("Backend orders not available", error);
+}
+
+allOrders = mergeOrders(localOrders, backendOrders);
+loading.style.display = "none";
+applySearchAndFilter();
+}
+
+function applySearchAndFilter(){
+const keyword = searchInput.value.trim().toLowerCase();
+
+let list = allOrders.filter(order => {
+const statusMatch = activeStatus === "all" || order.status === activeStatus;
+const text = [
+order.orderId,
+order.customerName,
+order.phone,
+order.city,
+order.state,
+order.payment,
+order.status,
+order.total,
+...order.items.map(item => item.name)
+].join(" ").toLowerCase();
+
+return statusMatch && (keyword === "" || text.includes(keyword));
+});
+
+renderOrders(list, keyword);
+}
+
+function renderOrders(list, keyword){
+ordersContainer.innerHTML = "";
+resultCount.textContent = "Showing " + list.length + " order" + (list.length === 1 ? "" : "s");
+
+if(list.length === 0){
+emptyText.textContent = keyword ? "No orders matched your search." : "Looks like you have not placed any orders yet.";
+emptyOrders.style.display = "block";
+return;
+}
+
+emptyOrders.style.display = "none";
+
+list.forEach(order => {
+const itemsMarkup = order.items.length ? order.items.map(item => `
+<div class="item">
+${imageTag(item, item.name)}
+<div>
+<h3>${item.name}</h3>
+<p>Qty: <b>${item.qty}</b></p>
+<p class="price">${money(item.price * item.qty)}</p>
+</div>
+</div>
+`).join("") : `
+<div class="item">
+${imageTag({name:"Ananya Aura"}, "Ananya Aura")}
+<div>
+<h3>Ananya Aura Jewellery Order</h3>
+<p>Product details saved in your checkout record.</p>
+<p class="price">${money(order.total)}</p>
+</div>
+</div>
+`;
+
+ordersContainer.innerHTML += `
+<article class="order-card">
+<div class="order-top">
+<div>
+<div class="order-id">${order.orderId}</div>
+<div class="order-meta">
+<span><i class="bi bi-person"></i> ${order.customerName}</span>
+<span><i class="bi bi-telephone"></i> ${order.phone}</span>
+${order.date ? `<span><i class="bi bi-calendar3"></i> ${order.date}</span>` : ""}
+</div>
+</div>
+<span class="status ${statusClass(order.status)}">${order.status}</span>
+</div>
+
+<div class="order-grid">
+<div class="items">${itemsMarkup}</div>
+<div class="details-panel">
+<div class="detail-line"><span>Payment</span><b>${order.payment}</b></div>
+<div class="detail-line"><span>Total</span><b>${money(order.total)}</b></div>
+<div class="detail-line"><span>Delivery</span><b>${order.deliveryDate}</b></div>
+<div class="detail-line"><span>Source</span><b>${order.source === "backend" ? "Saved Order" : "Checkout"}</b></div>
+</div>
+</div>
+
+<div class="actions">
+<button class="card-btn view" onclick="viewOrder('${order.orderId}')">View</button>
+<button class="card-btn track" onclick="trackOrder('${order.orderId}')">Track</button>
+<button class="card-btn buy" onclick="buyAgain('${order.orderId}')">Buy Again</button>
+<button class="card-btn invoice" onclick="downloadInvoice('${order.orderId}')">Invoice</button>
+<button class="card-btn cancel" ${order.status === "Cancelled" || order.status === "Delivered" || order.status === "Shipped" ? "disabled" : ""} onclick="cancelOrder('${order.orderId}')">Cancel</button>
+<button class="card-btn cancel" ${order.status !== "Delivered" ? "disabled" : ""} onclick="returnOrder('${order.orderId}')">Return</button>
+</div>
+</article>
+`;
+});
+}
+
+function findOrder(id){
+return allOrders.find(order => order.orderId === id);
+}
+
+function viewOrder(id){
+const order = findOrder(id);
+if(!order) return;
+
+modalTitle.textContent = "Order " + order.orderId;
+modalContent.innerHTML = `
+<div class="details-panel">
+<div class="detail-line"><span>Customer</span><b>${order.customerName}</b></div>
+<div class="detail-line"><span>Phone</span><b>${order.phone}</b></div>
+<div class="detail-line"><span>Payment</span><b>${order.payment}</b></div>
+<div class="detail-line"><span>Status</span><b>${order.status}</b></div>
+<div class="detail-line"><span>Total</span><b>${money(order.total)}</b></div>
+<div class="detail-line"><span>Delivery</span><b>${order.deliveryDate}</b></div>
+</div>
+<div class="items" style="margin-top:16px;">
+${(order.items.length ? order.items : [{name:"Ananya Aura Jewellery Order", price:order.total, qty:1, image:"ananya.jpeg"}]).map(item => `
+<div class="item">
+${imageTag(item, item.name)}
+<div>
+<h3>${item.name}</h3>
+<p>Quantity: <b>${item.qty || 1}</b></p>
+<p class="price">${money((item.price || order.total) * (item.qty || 1))}</p>
+</div>
+</div>
+`).join("")}
+</div>
+<div class="actions" style="grid-template-columns:repeat(3,1fr);">
+<button class="card-btn track" onclick="trackOrder('${order.orderId}')">Track</button>
+<button class="card-btn invoice" onclick="downloadInvoice('${order.orderId}')">Invoice</button>
+<button class="card-btn buy" onclick="buyAgain('${order.orderId}')">Buy Again</button>
+</div>
+`;
+orderModal.style.display = "flex";
+}
+
+function trackOrder(id){
+const order = findOrder(id);
+if(!order) return;
+localStorage.setItem("currentOrder", JSON.stringify(makeTrackableOrder(order)));
+window.location.href = "trackorder.html";
+}
+
+function buyAgain(id){
+const order = findOrder(id);
+if(!order) return;
+
+if(order.items.length === 0){
+showToast("Product details unavailable. Opening shop.");
+setTimeout(() => location.href = "home.html", 700);
+return;
+}
+
+localStorage.setItem("checkoutItems", JSON.stringify(order.items));
+window.location.href = "orders.html";
+}
+
+async function cancelOrder(id){
+const order = findOrder(id);
+if(!order) return;
+
+if(["Shipped","Delivered","Cancelled"].includes(order.status)){
+showToast("This order cannot be cancelled.");
+return;
+}
+
+if(confirm("Cancel order " + order.orderId + "?")){
+try{
+await saveOrderStatus(order.orderId, "Cancelled");
+order.status = "Cancelled";
+setOverride(order.orderId, "Cancelled");
+
+let localOrders = JSON.parse(localStorage.getItem("orders")) || [];
+localOrders = localOrders.map(saved => {
+if((saved.orderId || saved.order_id) === order.orderId){
+saved.status = "Cancelled";
+}
+return saved;
+});
+localStorage.setItem("orders", JSON.stringify(localOrders));
+
+showToast("Order cancelled");
+applySearchAndFilter();
+}catch(error){
+showToast(error.message || "Order status not saved");
+}
+}
+}
+
+async function returnOrder(id){
+const order = findOrder(id);
+if(!order) return;
+
+if(order.status !== "Delivered"){
+showToast("Only delivered orders can be returned.");
+return;
+}
+
+if(confirm("Return order " + order.orderId + "?")){
+try{
+await saveOrderStatus(order.orderId, "Returned");
+order.status = "Returned";
+setOverride(order.orderId, "Returned");
+showToast("Return requested");
+applySearchAndFilter();
+}catch(error){
+showToast(error.message || "Return status not saved");
+}
+}
+}
+
+function downloadInvoice(id){
+const order = findOrder(id);
+if(!order) return;
+
+let invoice = `
+ANANYA AURA JEWELLERY
+=====================
+
+Order ID : ${order.orderId}
+Customer : ${order.customerName}
+Phone : ${order.phone}
+Payment : ${order.payment}
+Status : ${order.status}
+Delivery : ${order.deliveryDate}
+
+Items
+-----
+`;
+
+const invoiceItems = order.items.length ? order.items : [{name:"Ananya Aura Jewellery Order", price:order.total, qty:1}];
+invoiceItems.forEach(item => {
+invoice += `
+${item.name}
+Qty : ${item.qty || 1}
+Price : ${money(item.price || order.total)}
+`;
+});
+
+invoice += `
+---------------------
+Grand Total : ${money(order.total)}
+
+Thank you for shopping with Ananya Aura Jewellery.
+`;
+
+const blob = new Blob([invoice], {type:"text/plain"});
+const link = document.createElement("a");
+link.href = URL.createObjectURL(blob);
+link.download = order.orderId + "-invoice.txt";
+link.click();
+URL.revokeObjectURL(link.href);
+showToast("Invoice downloaded");
+}
+
+function showToast(message){
+toast.textContent = message;
+toast.classList.add("show");
+setTimeout(() => toast.classList.remove("show"), 1800);
+}
+
+document.getElementById("searchBtn").addEventListener("click", applySearchAndFilter);
+document.getElementById("clearBtn").addEventListener("click", () => {
+searchInput.value = "";
+searchInput.focus();
+applySearchAndFilter();
+});
+document.getElementById("refreshBtn").addEventListener("click", loadAllOrders);
+
+searchInput.addEventListener("input", applySearchAndFilter);
+searchInput.addEventListener("keydown", event => {
+if(event.key === "Enter") applySearchAndFilter();
+if(event.key === "Escape"){
+searchInput.value = "";
+applySearchAndFilter();
+}
+});
+
+document.querySelectorAll(".filter-btn").forEach(button => {
+button.addEventListener("click", () => {
+document.querySelectorAll(".filter-btn").forEach(btn => btn.classList.remove("active"));
+button.classList.add("active");
+activeStatus = button.dataset.status;
+applySearchAndFilter();
+});
+});
+
+document.getElementById("closeModal").addEventListener("click", () => orderModal.style.display = "none");
+orderModal.addEventListener("click", event => {
+if(event.target === orderModal) orderModal.style.display = "none";
+});
+document.addEventListener("keydown", event => {
+if(event.key === "Escape") orderModal.style.display = "none";
+});
+
+loadAllOrders();
+function openOrder(id){
+
+    localStorage.setItem(
+        "selectedOrder",
+        id
+    );
+
+    window.location.href =
+    "orderdetails.html";
+}
+</script>
+</body>
+</html>

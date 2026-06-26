@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Order Successful | Ananya Aura</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+
+background:#0d0d0d;
+
+color:white;
+
+}
+
+.container{
+
+max-width:900px;
+
+margin:auto;
+
+padding:30px 20px 120px;
+
+}
+
+.success-card{
+
+background:#181818;
+
+border:1px solid #333;
+
+border-radius:20px;
+
+padding:40px;
+
+text-align:center;
+
+box-shadow:0 0 20px rgba(212,175,55,.15);
+
+}
+
+.tick{
+
+width:120px;
+
+height:120px;
+
+margin:auto;
+
+background:#1fb141;
+
+border-radius:50%;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+font-size:65px;
+
+font-weight:bold;
+
+color:white;
+
+animation:pop .8s ease;
+
+}
+
+@keyframes pop{
+
+0%{
+
+transform:scale(.2);
+
+opacity:0;
+
+}
+
+70%{
+
+transform:scale(1.15);
+
+}
+
+100%{
+
+transform:scale(1);
+
+opacity:1;
+
+}
+
+}
+
+.success-title{
+
+font-size:34px;
+
+font-weight:700;
+
+margin-top:25px;
+
+color:#d4af37;
+
+}
+
+.success-msg{
+
+margin-top:10px;
+
+font-size:18px;
+
+color:#bbb;
+
+}
+
+.info-card{
+
+margin-top:30px;
+
+background:#202020;
+
+padding:25px;
+
+border-radius:15px;
+
+border:1px solid #333;
+
+}
+
+.info-title{
+
+font-size:22px;
+
+font-weight:600;
+
+color:#d4af37;
+
+margin-bottom:20px;
+
+}
+
+.info-row{
+
+display:flex;
+
+justify-content:space-between;
+
+padding:12px 0;
+
+border-bottom:1px solid #333;
+
+}
+
+.info-row:last-child{
+
+border-bottom:none;
+
+}
+
+.label{
+
+color:#aaa;
+
+}
+
+.value{
+
+font-weight:600;
+
+color:white;
+
+}
+
+.delivery-box{
+
+margin-top:25px;
+
+padding:18px;
+
+background:#222;
+
+border-left:5px solid #d4af37;
+
+border-radius:12px;
+
+}
+
+.delivery-box h3{
+
+color:#d4af37;
+
+margin-bottom:8px;
+
+}
+
+.delivery-box p{
+
+color:#ddd;
+
+font-size:15px;
+
+line-height:25px;
+
+}
+
+.items-card{
+
+margin-top:30px;
+
+background:#181818;
+
+padding:20px;
+
+border-radius:15px;
+
+border:1px solid #333;
+
+}
+
+.items-card h2{
+
+color:#d4af37;
+
+margin-bottom:20px;
+
+}
+
+#orderedItems{
+
+display:flex;
+
+flex-direction:column;
+
+gap:15px;
+
+}
+
+.item{
+
+display:flex;
+
+align-items:center;
+
+gap:15px;
+
+padding:15px;
+
+background:#222;
+
+border-radius:12px;
+
+}
+
+.item img{
+
+width:80px;
+
+height:80px;
+
+object-fit:cover;
+
+border-radius:10px;
+
+}
+
+.item-details{
+
+flex:1;
+
+}
+
+.item-details h3{
+
+font-size:18px;
+
+margin-bottom:5px;
+
+}
+
+.item-details p{
+
+color:#aaa;
+
+font-size:14px;
+
+}
+
+.item-price{
+
+font-size:20px;
+
+font-weight:700;
+
+color:#d4af37;
+
+}
+
+.button-area{
+
+margin-top:35px;
+
+display:grid;
+
+grid-template-columns:repeat(2,1fr);
+
+gap:15px;
+
+}
+
+.btn{
+
+padding:15px;
+
+border:none;
+
+border-radius:12px;
+
+cursor:pointer;
+
+font-size:17px;
+
+font-weight:600;
+
+transition:.3s;
+
+}
+
+.primary{
+
+background:#d4af37;
+
+color:black;
+
+}
+
+.primary:hover{
+
+transform:translateY(-3px);
+
+}
+
+.secondary{
+
+background:#333;
+
+color:white;
+
+}
+
+.secondary:hover{
+
+background:#444;
+
+}
+
+@media(max-width:768px){
+
+.container{
+
+padding:20px 15px 120px;
+
+}
+
+.success-card{
+
+padding:25px;
+
+}
+
+.info-row{
+
+flex-direction:column;
+
+gap:5px;
+
+}
+
+.button-area{
+
+grid-template-columns:1fr;
+
+}
+
+.tick{
+
+width:90px;
+
+height:90px;
+
+font-size:50px;
+
+}
+
+.success-title{
+
+font-size:26px;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="success-card">
+
+<div class="tick">
+
+✓
+
+</div>
+
+<h1 class="success-title">
+
+Order Placed Successfully
+
+</h1>
+
+<p class="success-msg">
+
+Thank you for shopping with <b>Ananya Aura</b>
+
+</p>
+
+<div class="info-card">
+
+<h2 class="info-title">
+
+Order Information
+
+</h2>
+
+<div class="info-row">
+
+<span class="label">
+
+Order ID
+
+</span>
+
+<span class="value"
+
+id="orderId">
+
+Loading...
+
+</span>
+
+</div>
+
+<div class="info-row">
+
+<span class="label">
+
+Customer
+
+</span>
+
+<span class="value"
+
+id="customerName">
+
+Loading...
+
+</span>
+
+</div>
+
+<div class="info-row">
+
+<span class="label">
+
+Payment
+
+</span>
+
+<span class="value"
+
+id="paymentMethod">
+
+Loading...
+
+</span>
+
+</div>
+
+<div class="info-row">
+
+<span class="label">
+
+Grand Total
+
+</span>
+
+<span class="value"
+
+id="grandTotal">
+
+₹0
+
+</span>
+
+</div>
+
+</div>
+
+<div class="delivery-box">
+
+<h3>
+
+Estimated Delivery
+
+</h3>
+
+<p id="deliveryDate">
+
+Loading...
+
+</p>
+
+</div>
+<!-- ORDERED ITEMS -->
+
+<div class="items-card">
+
+<h2>🛍 Ordered Items</h2>
+
+<div id="orderedItems">
+
+<!-- JavaScript Loads Products Here -->
+
+</div>
+
+</div>
+
+
+<!-- ACTION BUTTONS -->
+
+<div class="button-area">
+
+<button
+class="btn primary"
+onclick="location.href='trackorder.html'">
+
+📦 Track Order
+
+</button>
+
+<button
+class="btn secondary"
+onclick="location.href='myorders.html'">
+
+📋 My Orders
+
+</button>
+
+<button
+class="btn secondary"
+onclick="downloadInvoice()">
+
+📄 Download Invoice
+
+</button>
+
+<button
+class="btn primary"
+onclick="location.href='home.html'">
+
+🛒 Continue Shopping
+
+</button>
+
+</div>
+
+
+<!-- THANK YOU -->
+
+<div
+style="
+margin-top:40px;
+padding:20px;
+background:#181818;
+border-radius:15px;
+border:1px solid #333;
+text-align:center;
+">
+
+<h2
+style="
+color:#d4af37;
+margin-bottom:15px;
+">
+
+❤️ Thank You!
+
+</h2>
+
+<p
+style="
+color:#bbb;
+line-height:28px;
+">
+
+Thank you for choosing
+<b>Ananya Aura Jewellery.</b>
+
+We truly appreciate your trust in us.
+
+Your jewellery will be packed securely and shipped soon.
+
+Have a wonderful day! ✨
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+
+<script>
+
+// ==========================
+// LOAD CURRENT ORDER
+// ==========================
+
+const order =
+JSON.parse(localStorage.getItem("currentOrder"));
+
+if(!order){
+
+alert("No Order Found");
+
+window.location.href="home.html";
+
+}
+
+// ==========================
+// LOAD ORDER DETAILS
+// ==========================
+
+document.getElementById("orderId").innerHTML=
+order.orderId;
+
+document.getElementById("customerName").innerHTML=
+order.address.name;
+
+document.getElementById("paymentMethod").innerHTML=
+order.payment;
+
+document.getElementById("grandTotal").innerHTML=
+"₹"+order.total;
+
+document.getElementById("deliveryDate").innerHTML=
+"Expected Delivery : <b>"+order.deliveryDate+"</b>";
+
+
+// ==========================
+// LOAD PRODUCTS
+// ==========================
+
+const container=
+document.getElementById("orderedItems");
+
+container.innerHTML="";
+
+order.items.forEach(item=>{
+
+let qty=item.qty || 1;
+
+container.innerHTML+=`
+
+<div class="item">
+
+<img src="${item.image}">
+
+<div class="item-details">
+
+<h3>${item.name}</h3>
+
+<p>
+
+Quantity :
+<b>${qty}</b>
+
+</p>
+
+</div>
+
+<div class="item-price">
+
+₹${item.price*qty}
+
+</div>
+
+</div>
+
+`;
+
+});
+
+
+// ==========================
+// DOWNLOAD INVOICE
+// ==========================
+
+function downloadInvoice(){
+
+let invoice=`
+
+==============================
+
+      ANANYA AURA
+
+==============================
+
+Order ID :
+${order.orderId}
+
+Customer :
+${order.address.name}
+
+Phone :
+${order.address.phone}
+
+Payment :
+${order.payment}
+
+Delivery :
+${order.deliveryDate}
+
+------------------------------
+
+PRODUCTS
+
+------------------------------
+
+`;
+
+order.items.forEach(item=>{
+
+invoice+=`
+
+${item.name}
+
+Qty : ${item.qty || 1}
+
+Price : ₹${item.price}
+
+------------------------------
+
+`;
+
+});
+
+invoice+=`
+
+Grand Total :
+
+₹${order.total}
+
+==============================
+
+THANK YOU ❤️
+
+==============================
+
+`;
+
+let blob=new Blob(
+
+[invoice],
+
+{
+
+type:"text/plain"
+
+}
+
+);
+
+let link=
+
+document.createElement("a");
+
+link.href=
+
+URL.createObjectURL(blob);
+
+link.download=
+
+order.orderId+".txt";
+
+link.click();
+
+}
+
+
+// ==========================
+// OPTIONAL AUTO SCROLL
+// ==========================
+
+window.scrollTo({
+
+top:0,
+
+behavior:"smooth"
+
+});
+
+</script>
+
+</body>
+
+</html>

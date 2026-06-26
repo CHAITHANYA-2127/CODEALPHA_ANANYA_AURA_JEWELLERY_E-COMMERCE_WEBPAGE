@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width,initial-scale=1.0">
+
+<title>Wishlist | Ananya Aura</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#0d0d0d;
+color:white;
+}
+
+.container{
+max-width:1200px;
+margin:auto;
+padding:30px 20px 100px;
+}
+
+.header{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+flex-wrap:wrap;
+
+margin-bottom:30px;
+
+}
+
+.header h1{
+
+font-size:34px;
+
+color:#d4af37;
+
+}
+
+.header p{
+
+color:#aaa;
+
+margin-top:8px;
+
+}
+
+.search{
+
+margin-top:20px;
+
+display:flex;
+
+gap:10px;
+
+}
+
+.search input{
+
+flex:1;
+
+padding:14px;
+
+border:none;
+
+border-radius:10px;
+
+background:#1e1e1e;
+
+color:white;
+
+font-size:15px;
+
+outline:none;
+
+}
+
+.search button{
+
+padding:14px 25px;
+
+background:#d4af37;
+
+border:none;
+
+border-radius:10px;
+
+font-weight:bold;
+
+cursor:pointer;
+
+}
+
+.products{
+
+display:grid;
+
+grid-template-columns:
+
+repeat(auto-fit,minmax(260px,1fr));
+
+gap:25px;
+
+margin-top:30px;
+
+}
+
+.card{
+
+background:#181818;
+
+border:1px solid #333;
+
+border-radius:18px;
+
+overflow:hidden;
+
+transition:.3s;
+
+}
+
+.card:hover{
+
+transform:translateY(-6px);
+
+box-shadow:0 0 18px rgba(212,175,55,.25);
+
+}
+
+.card img{
+
+width:100%;
+
+height:260px;
+
+object-fit:cover;
+
+}
+
+.details{
+
+padding:18px;
+
+}
+
+.details h3{
+
+font-size:20px;
+
+margin-bottom:10px;
+
+}
+
+.details p{
+
+color:#999;
+
+font-size:14px;
+
+line-height:24px;
+
+}
+
+.price{
+
+margin-top:12px;
+
+font-size:22px;
+
+font-weight:bold;
+
+color:#d4af37;
+
+}
+
+.buttons{
+
+display:grid;
+
+grid-template-columns:1fr 1fr;
+
+gap:10px;
+
+margin-top:18px;
+
+}
+
+.buttons button{
+
+padding:12px;
+
+border:none;
+
+border-radius:10px;
+
+cursor:pointer;
+
+font-weight:600;
+
+transition:.3s;
+
+}
+
+.cart{
+
+background:#d4af37;
+
+color:black;
+
+}
+
+.remove{
+
+background:#e53935;
+
+color:white;
+
+}
+
+.view{
+
+grid-column:1/3;
+
+background:#2196f3;
+
+color:white;
+
+}
+
+.buttons button:hover{
+
+opacity:.9;
+
+transform:scale(1.02);
+
+}
+
+.empty{
+
+display:none;
+
+text-align:center;
+
+padding:70px 20px;
+
+}
+
+.empty img{
+
+width:180px;
+
+margin-bottom:20px;
+
+}
+
+.empty h2{
+
+color:#d4af37;
+
+margin-bottom:15px;
+
+}
+
+.empty p{
+
+color:#999;
+
+line-height:28px;
+
+}
+
+@media(max-width:768px){
+
+.header{
+
+flex-direction:column;
+
+align-items:flex-start;
+
+}
+
+.search{
+
+flex-direction:column;
+
+width:100%;
+
+}
+
+.search button{
+
+width:100%;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="header">
+
+<div>
+
+<h1>
+
+❤️ My Wishlist
+
+</h1>
+
+<p>
+
+Save your favourite jewellery here.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="search">
+
+<input
+
+type="text"
+
+id="searchWishlist"
+
+placeholder="Search Wishlist Products...">
+
+<button
+
+onclick="searchWishlist()">
+
+Search
+
+</button>
+
+</div>
+
+<div
+
+id="wishlistContainer"
+
+class="products">
+
+<!-- JavaScript Loads Products -->
+
+</div>
+<!-- EMPTY WISHLIST -->
+
+<div id="emptyWishlist" class="empty">
+
+<img src="images/empty-wishlist.png" alt="Empty Wishlist">
+
+<h2>Your Wishlist is Empty ❤️</h2>
+
+<p>
+
+Looks like you haven't added any jewellery to your wishlist yet.
+
+Browse our latest collections and save your favourites.
+
+</p>
+
+<button
+
+onclick="window.location.href='home.html'"
+
+style="
+
+margin-top:25px;
+
+padding:15px 35px;
+
+background:#d4af37;
+
+color:#000;
+
+border:none;
+
+border-radius:10px;
+
+font-size:16px;
+
+font-weight:bold;
+
+cursor:pointer;
+
+">
+
+🛍 Continue Shopping
+
+</button>
+
+</div>
+
+
+<!-- FOOTER -->
+
+<footer
+
+style="
+
+margin-top:60px;
+
+padding:25px;
+
+text-align:center;
+
+background:#181818;
+
+border-top:1px solid #333;
+
+border-radius:15px;
+
+">
+
+<h2
+
+style="
+
+color:#d4af37;
+
+margin-bottom:12px;
+
+">
+
+❤️ Thank You
+
+</h2>
+
+<p
+
+style="
+
+color:#999;
+
+line-height:28px;
+
+font-size:15px;
+
+">
+
+Thank you for choosing
+
+<b>Ananya Aura Jewellery.</b>
+
+Your favourite jewellery is always just one click away.
+
+</p>
+
+</footer>
+
+</div>
+
+<script>
+// ===========================
+// WISHLIST
+// ===========================
+
+const API_BASE_URL = "http://127.0.0.1:8000";
+let userId = localStorage.getItem("user_id");
+let wishlist = [];
+
+const container =
+document.getElementById("wishlistContainer");
+
+const empty =
+document.getElementById("emptyWishlist");
+
+function wishlistStorageKey(){
+return userId ? `wishlist_${userId}` : "wishlist_guest";
+}
+
+function requireLogin(){
+if(!userId){
+alert("Please login first");
+window.location.href = "login.html";
+return false;
+}
+return true;
+}
+
+function fetchWishlist(){
+if(!requireLogin()) return;
+
+fetch(`${API_BASE_URL}/wishlist/${userId}/`)
+.then(res => res.json())
+.then(data => {
+wishlist = Array.isArray(data) ? data : [];
+localStorage.setItem(wishlistStorageKey(), JSON.stringify(wishlist));
+localStorage.setItem("wishlist", JSON.stringify(wishlist));
+loadWishlist();
+})
+.catch(error => {
+console.log(error);
+wishlist = JSON.parse(localStorage.getItem(wishlistStorageKey())) || [];
+loadWishlist();
+});
+}
+
+// ===========================
+// LOAD WISHLIST
+// ===========================
+
+function loadWishlist(data = wishlist){
+
+container.innerHTML="";
+
+if(data.length===0){
+
+container.style.display="none";
+
+empty.style.display="block";
+
+return;
+
+}
+
+container.style.display="grid";
+
+empty.style.display="none";
+
+data.forEach((item,index)=>{
+
+container.innerHTML+=`
+
+<div class="card">
+
+<img src="${item.image}" alt="${item.name}">
+
+<div class="details">
+
+<h3>${item.name}</h3>
+
+<p>${item.description || "Premium Jewellery Collection"}</p>
+
+<div class="price">
+
+₹${item.price}
+
+</div>
+
+<div class="buttons">
+
+<button
+class="cart"
+onclick="moveToCart(${index})">
+
+🛒 Move To Cart
+
+</button>
+
+<button
+class="remove"
+onclick="removeWishlist(${index})">
+
+❌ Remove
+
+</button>
+
+<button
+class="view"
+onclick="quickView(${index})">
+
+👁 Quick View
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+}
+
+wishlist = JSON.parse(localStorage.getItem(wishlistStorageKey())) || [];
+loadWishlist();
+fetchWishlist();
+
+
+// ===========================
+// SEARCH
+// ===========================
+
+function searchWishlist(){
+
+let keyword=
+
+document.getElementById("searchWishlist")
+
+.value
+
+.toLowerCase()
+
+.trim();
+
+let filtered=
+
+wishlist.filter(item=>
+
+item.name.toLowerCase().includes(keyword)
+
+);
+
+loadWishlist(filtered);
+
+}
+
+
+// ===========================
+// REMOVE
+// ===========================
+
+function removeWishlist(index){
+
+if(confirm("Remove this item from wishlist?")){
+
+wishlist.splice(index,1);
+
+localStorage.setItem(
+
+wishlistStorageKey(),
+
+JSON.stringify(wishlist)
+
+);
+localStorage.setItem("wishlist", JSON.stringify(wishlist));
+
+loadWishlist();
+
+}
+
+}
+
+
+// ===========================
+// MOVE TO CART
+// ===========================
+
+function moveToCart(index){
+
+let cart=
+
+JSON.parse(localStorage.getItem("cart")) || [];
+
+let product=wishlist[index];
+
+let exists=
+
+cart.find(item=>item.name===product.name);
+
+if(exists){
+
+exists.qty=(exists.qty || 1)+1;
+
+}else{
+
+product.qty=1;
+
+cart.push(product);
+
+}
+
+localStorage.setItem(
+
+"cart",
+
+JSON.stringify(cart)
+
+);
+
+wishlist.splice(index,1);
+
+localStorage.setItem(
+
+wishlistStorageKey(),
+
+JSON.stringify(wishlist)
+
+);
+localStorage.setItem("wishlist", JSON.stringify(wishlist));
+
+alert("Added to Cart Successfully 🛒");
+
+loadWishlist();
+
+}
+
+
+// ===========================
+// QUICK VIEW
+// ===========================
+
+function quickView(index){
+
+let item=wishlist[index];
+
+alert(
+
+"Product : "+item.name+
+
+"\n\nPrice : ₹"+item.price+
+
+"\n\n"+
+
+(item.description ||
+
+"Premium Jewellery Collection")
+
+);
+
+}
+
+
+// ===========================
+// ADD TO WISHLIST
+// (Use this from home page)
+
+// ===========================
+
+function updateWishlistCount() {
+    let wishlist = JSON.parse(localStorage.getItem(wishlistStorageKey())) || [];
+    document.getElementById("wishlistCount").innerText = wishlist.length;
+}
+
+function addToWishlist(product){
+
+let list=
+
+JSON.parse(localStorage.getItem(wishlistStorageKey())) || [];
+
+let exists=
+
+list.find(item=>item.name===product.name);
+
+if(exists){
+
+alert("Already in Wishlist ❤️");
+
+return;
+
+}
+
+list.push(product);
+
+localStorage.setItem(
+
+wishlistStorageKey(),
+
+JSON.stringify(list)
+
+);
+localStorage.setItem("wishlist", JSON.stringify(list));
+updateWishlistCount();
+
+alert("Added to Wishlist ❤️");
+
+}
+// ===========================
+// PAGE TOP
+// ===========================
+
+window.scrollTo({
+
+top:0,
+
+behavior:"smooth"
+
+});
+if(false && userId){
+fetch(
+`http://127.0.0.1:8000/wishlist/${userId}/`
+)
+
+.then(res=>res.json())
+
+.then(data=>{
+
+    console.log(data);
+
+});
+}
+
+removeWishlist = function(index){
+if(!wishlist[index] || !confirm("Remove this item from wishlist?")) return;
+
+fetch(`${API_BASE_URL}/remove-wishlist/${wishlist[index].id}/`)
+.then(res => res.json())
+.then(() => {
+wishlist.splice(index,1);
+localStorage.setItem(wishlistStorageKey(), JSON.stringify(wishlist));
+localStorage.setItem("wishlist", JSON.stringify(wishlist));
+loadWishlist();
+});
+};
+
+moveToCart = function(index){
+let product = wishlist[index];
+if(!product) return;
+
+fetch(`${API_BASE_URL}/add-cart/`, {
+method: "POST",
+headers: {"Content-Type": "application/json"},
+body: JSON.stringify({
+user_id: userId,
+product_id: product.product_id,
+name: product.name,
+price: product.price,
+image: product.image
+})
+})
+.then(res => res.json())
+.then(data => {
+if(!data.success){
+alert(data.message || "Could not move item");
+return null;
+}
+return fetch(`${API_BASE_URL}/remove-wishlist/${product.id}/`);
+})
+.then(response => {
+if(!response) return;
+wishlist.splice(index,1);
+localStorage.setItem(wishlistStorageKey(), JSON.stringify(wishlist));
+localStorage.setItem("wishlist", JSON.stringify(wishlist));
+alert("Added to Cart Successfully");
+loadWishlist();
+})
+.catch(error => {
+console.log(error);
+alert("Server Error");
+});
+};
+
+if(false){
+container.innerHTML += `
+<div class="wishlist-card">
+
+    <img src="${item.image}">
+
+    <h3>${item.name}</h3>
+
+    <p>₹${item.price}</p>
+
+    <button
+    onclick="removeWishlist(${item.id})">
+    🗑 Remove
+    </button>
+
+</div>
+`;
+}
+function removeCart(cartId){
+
+    fetch(
+    `http://127.0.0.1:8000/remove-cart/${cartId}/`
+    )
+
+    .then(res=>res.json())
+
+    .then(data=>{
+
+        document
+        .getElementById(
+            `cart-${cartId}`
+        )
+        ?.remove();
+
+        updateCartCount();
+
+    });
+
+}
+
+</script>
+
+</body>
+
+</html>

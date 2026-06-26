@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ananya Aura - Cart</title>
+
+<link rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins,sans-serif;
+}
+
+body{
+background:#0d0d0d;
+color:white;
+padding:20px;
+padding-bottom:100px;
+}
+
+h1{
+text-align:center;
+color:#d4af37;
+margin-bottom:25px;
+}
+
+.cart-item{
+display:flex;
+gap:15px;
+background:#1a1a1a;
+padding:15px;
+border-radius:15px;
+margin-bottom:15px;
+align-items:center;
+border:1px solid #333;
+}
+
+.cart-item img{
+width:120px;
+height:120px;
+object-fit:cover;
+border-radius:10px;
+}
+
+.details{
+flex:1;
+}
+
+.details h3{
+margin-bottom:8px;
+}
+
+.price{
+color:#d4af37;
+font-size:20px;
+font-weight:bold;
+}
+
+.qty{
+display:flex;
+align-items:center;
+gap:10px;
+margin-top:10px;
+}
+
+.qty button{
+width:35px;
+height:35px;
+border:none;
+border-radius:6px;
+background:#d4af37;
+font-size:18px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.remove-btn{
+background:red;
+color:white;
+border:none;
+padding:10px 15px;
+border-radius:6px;
+cursor:pointer;
+margin-top:10px;
+}
+
+.order-btn{
+background:green;
+color:white;
+border:none;
+padding:10px 15px;
+border-radius:6px;
+cursor:pointer;
+margin-top:10px;
+margin-left:10px;
+}
+
+.total-box{
+background:#1a1a1a;
+padding:20px;
+border-radius:15px;
+margin-top:20px;
+border:1px solid #333;
+}
+
+.total-box h2{
+color:#d4af37;
+}
+
+.checkout-btn{
+width:100%;
+padding:15px;
+border:none;
+background:#d4af37;
+color:black;
+font-size:18px;
+font-weight:bold;
+border-radius:10px;
+cursor:pointer;
+margin-top:15px;
+}
+
+.continue-btn{
+width:100%;
+padding:15px;
+border:none;
+background:#333;
+color:white;
+font-size:16px;
+border-radius:10px;
+cursor:pointer;
+margin-top:10px;
+}
+
+.empty-cart{
+text-align:center;
+padding:50px;
+font-size:22px;
+color:#d4af37;
+}
+
+@media(max-width:768px){
+
+.cart-item{
+flex-direction:column;
+text-align:center;
+}
+
+.cart-item img{
+width:100%;
+height:250px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>🛒 My Cart</h1>
+
+<div id="cartContainer"></div>
+
+<div class="total-box">
+
+<h2>Total : ₹<span id="total">0</span></h2>
+
+<button class="checkout-btn"
+onclick="checkout()">
+Proceed To Checkout
+</button>
+
+<button class="continue-btn"
+onclick="window.location.href='home.html'">
+Continue Shopping
+</button>
+
+</div>
+
+<script>
+
+const API_BASE_URL = "http://127.0.0.1:8000";
+let userId = localStorage.getItem("user_id");
+let cart = [];
+
+function requireLogin(){
+if(!userId){
+alert("Please login first");
+window.location.href = "login.html";
+return false;
+}
+return true;
+}
+
+function saveCartItem(item){
+return fetch(`${API_BASE_URL}/update-cart/${item.id}/`, {
+method: "POST",
+headers: {"Content-Type": "application/json"},
+body: JSON.stringify({qty: item.qty})
+});
+}
+
+function loadCart(){
+if(!requireLogin()) return;
+
+fetch(`${API_BASE_URL}/cart/${userId}/`)
+.then(res => res.json())
+.then(data => {
+cart = Array.isArray(data) ? data : [];
+localStorage.setItem("cart", JSON.stringify(cart));
+renderCart();
+})
+.catch(error => {
+console.log(error);
+cart = JSON.parse(localStorage.getItem("cart")) || [];
+renderCart();
+});
+}
+
+function renderCart(){
+
+const container =
+document.getElementById("cartContainer");
+
+const totalElement =
+document.getElementById("total");
+
+container.innerHTML="";
+
+let total=0;
+
+if(cart.length===0){
+
+container.innerHTML=`
+<div class="empty-cart">
+🛒 Your Cart Is Empty
+</div>
+`;
+
+totalElement.innerText="0";
+return;
+}
+
+cart.forEach((item,index)=>{
+
+if(!item.qty){
+item.qty=1;
+}
+
+let itemTotal =
+item.price * item.qty;
+
+total += itemTotal;
+
+container.innerHTML += `
+
+<div class="cart-item">
+
+<img src="${item.image}" alt="${item.name}">
+
+<div class="details">
+
+<h3>${item.name}</h3>
+
+<p class="price">
+₹${item.price}
+</p>
+
+<div class="qty">
+
+<button onclick="decreaseQty(${index})">-</button>
+
+<span>${item.qty}</span>
+
+<button onclick="increaseQty(${index})">+</button>
+
+</div>
+
+<p style="margin-top:10px;">
+Subtotal : ₹${itemTotal}
+</p>
+
+<button class="remove-btn"
+onclick="removeItem(${index})">
+Remove
+</button>
+
+<button class="order-btn"
+onclick="buyNow(${index})">
+Buy Now
+</button>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+totalElement.innerText = total;
+}
+
+function increaseQty(index){
+
+cart[index].qty++;
+
+saveCartItem(cart[index]).then(renderCart);
+}
+
+function decreaseQty(index){
+
+if(cart[index].qty > 1){
+
+cart[index].qty--;
+
+}else{
+
+removeItem(index);
+return;
+}
+
+saveCartItem(cart[index]).then(renderCart);
+}
+
+function removeItem(index){
+
+let item = cart[index];
+
+fetch(`${API_BASE_URL}/remove-cart/${item.id}/`)
+.then(res => res.json())
+.then(() => {
+cart.splice(index,1);
+localStorage.setItem("cart", JSON.stringify(cart));
+renderCart();
+});
+}
+
+function buyNow(index){
+
+let singleProduct =
+[cart[index]];
+
+localStorage.setItem(
+"checkoutItems",
+JSON.stringify(singleProduct)
+);
+localStorage.setItem("checkoutSource", "cart");
+
+window.location.href =
+"orders.html";
+}
+
+function checkout(){
+
+if(cart.length===0){
+
+alert("Cart is Empty!");
+return;
+}
+
+localStorage.setItem(
+"checkoutItems",
+JSON.stringify(cart)
+);
+localStorage.setItem("checkoutSource", "cart");
+
+window.location.href =
+"orders.html";
+}
+
+loadCart();
+if(false){
+container.innerHTML += `
+<div class="cart-card">
+
+    <img src="${item.image}">
+
+    <h3>${item.name}</h3>
+
+    <p>₹${item.price}</p>
+
+    <p>Qty : ${item.qty}</p>
+
+    <button
+    onclick="removeCart(${item.id})">
+    🗑 Remove
+    </button>
+
+</div>
+`;
+}
+function removeCart(cartId){
+
+    fetch(
+    `http://127.0.0.1:8000/remove-cart/${cartId}/`
+    )
+
+    .then(res=>res.json())
+
+    .then(data=>{
+
+        alert(data.message);
+
+        location.reload();
+
+    });
+
+}
+
+</script>
+
+</body>
+</html>

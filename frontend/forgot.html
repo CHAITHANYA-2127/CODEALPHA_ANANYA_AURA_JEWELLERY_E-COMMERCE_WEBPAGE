@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Forgot Password - Ananya Aura</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+body{
+    background-image:url("bg.jpeg");
+    background-size:cover;
+    background-position:center;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.forgot-card{
+    width:450px;
+    background:rgba(20,20,20,0.9);
+    color:white;
+    border:2px solid #d4af37;
+    border-radius:20px;
+    padding:20px;
+    box-shadow:0 0 20px rgba(212,175,55,0.4);
+}
+
+.logo-img{
+    width:100px;
+    height:100px;
+    border-radius:50%;
+    object-fit:cover;
+    display:block;
+    margin:auto;
+    border:3px solid #d4af37;
+}
+
+h2{
+    color:#d4af37;
+    text-align:center;
+    margin-top:15px;
+}
+
+.btn-reset{
+    width:100%;
+    background:#d4af37;
+    color:black;
+    font-weight:bold;
+    border:none;
+    margin-top:15px;
+}
+
+.btn-reset:hover{
+    background:#f4d03f;
+}
+
+.back-link{
+    text-align:center;
+    margin-top:15px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="forgot-card">
+
+    <img src="ananya.jpeg" class="logo-img" alt="Ananya Aura Jewellery">
+
+    <div id="requestPanel">
+        <h2>Forgot Password</h2>
+
+        <p class="text-center">
+            Enter your registered email address to reset your password.
+        </p>
+
+        <form id="forgotForm">
+            <label class="form-label">Email Address</label>
+
+            <input type="email"
+                   class="form-control"
+                   id="forgotEmail"
+                   placeholder="name@gmail.com"
+                   required>
+
+            <button type="submit" class="btn btn-reset">
+                Send Reset Link
+            </button>
+        </form>
+    </div>
+
+    <div id="resetPanel" class="d-none">
+        <h2>Reset Password</h2>
+
+        <p class="text-center">
+            Enter your new password below.
+        </p>
+
+        <form id="resetForm">
+            <label class="form-label">New Password</label>
+            <input type="password"
+                   class="form-control"
+                   id="newPassword"
+                   placeholder="New Password"
+                   required>
+
+            <label class="form-label mt-3">Confirm Password</label>
+            <input type="password"
+                   class="form-control"
+                   id="confirmNewPassword"
+                   placeholder="Confirm Password"
+                   required>
+
+            <small class="text-warning d-block mt-2">
+                Password must contain 8 characters, 1 capital letter, 1 number and 1 special character.
+            </small>
+
+            <button type="submit" class="btn btn-reset">
+                Reset Password
+            </button>
+        </form>
+    </div>
+
+    <div class="back-link">
+        <a href="login.html">Back to Login</a>
+    </div>
+
+</div>
+<script>
+const API_BASE_URL = "http://127.0.0.1:8000";
+const passwordPattern = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}$/;
+const resetToken = new URLSearchParams(window.location.search).get("token");
+
+if(resetToken){
+    document.getElementById("requestPanel").classList.add("d-none");
+    document.getElementById("resetPanel").classList.remove("d-none");
+}
+
+document.getElementById("forgotForm").addEventListener("submit", function(e){
+    e.preventDefault();
+
+    const email = document.getElementById("forgotEmail").value.trim();
+
+    if(!email || !email.includes("@") || !email.includes(".")){
+        alert("Please enter a valid email address");
+        return;
+    }
+
+    fetch(`${API_BASE_URL}/forgot-password/`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ email: email })
+    })
+    .then(res => res.json())
+    .then(data => {
+        if(data.reset_link){
+            alert("Email setup is missing, so opening reset page directly.");
+            window.location.href = data.reset_link;
+            return;
+        }
+
+        alert(data.message || "If this email is registered, a password reset link has been sent.");
+    })
+    .catch(error => {
+        console.log(error);
+        alert("Server Error");
+    });
+});
+
+document.getElementById("resetForm").addEventListener("submit", function(e){
+    e.preventDefault();
+
+    const password = document.getElementById("newPassword").value;
+    const confirmPassword = document.getElementById("confirmNewPassword").value;
+
+    if(!passwordPattern.test(password)){
+        alert("Password must contain 8 characters, 1 capital letter, 1 number and 1 special character.");
+        return;
+    }
+
+    if(password !== confirmPassword){
+        alert("Passwords do not match");
+        return;
+    }
+
+    fetch(`${API_BASE_URL}/reset-password/`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            token: resetToken,
+            password: password
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        if(data.success){
+            alert(data.message);
+            window.location.href = "login.html";
+            return;
+        }
+
+        alert(data.message || "Reset link is invalid or expired");
+    })
+    .catch(error => {
+        console.log(error);
+        alert("Server Error");
+    });
+});
+</script>
+
+</body>
+</html>

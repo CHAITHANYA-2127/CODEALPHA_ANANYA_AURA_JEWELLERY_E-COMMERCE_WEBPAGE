@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ANANYA AURA JEWELLERY</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="./login.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cause:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+
+<body class="d-flex justify-content-center align-items-center min-vh-100">
+<div class="card text-center login-card">
+    <img src="ananya.jpeg" class="logo-img" alt="Ananya Aura Jewellery">
+
+    <div class="card-body">
+        <h2 class="card-title m-auto">WELCOME</h2>
+        <p class="card-text">My Dear Customer Please Login To Continue</p>
+
+        <form class="text-start" id="loginForm">
+            <label for="emailinput" class="form-label" style="font-size:20px;">Email</label>
+            <input type="email" class="form-control" id="emailinput" placeholder="name@gmail.com" required>
+
+            <label for="passwordinput" class="form-label mt-3" style="font-size:20px;">Password</label>
+            <div class="password-container">
+                <input type="password" class="form-control" id="passwordinput" placeholder="Password" required>
+                <i class="bi bi-eye-fill" id="togglePassword"></i>
+            </div>
+
+            <small class="text-warning">
+                Password must contain 8 characters, 1 capital letter, 1 number and 1 special character.
+            </small>
+
+            <button class="btn btn-primary w-100" id="loginBtn" type="submit">
+                LOGIN
+            </button>
+        </form>
+
+        <p class="text-st mt-4">
+            Don't have an account?
+            <a href="./create.html">Sign up</a>
+        </p>
+        <p>
+            <a href="./forgot.html">Forgot Password?</a>
+        </p>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+<script>
+const API_BASE_URL = "http://127.0.0.1:8000";
+const loginForm = document.getElementById("loginForm");
+const passwordInput = document.getElementById("passwordinput");
+const togglePassword = document.getElementById("togglePassword");
+const passwordPattern = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}$/;
+
+togglePassword.addEventListener("click", function(){
+    passwordInput.type = passwordInput.type === "password" ? "text" : "password";
+    this.classList.toggle("bi-eye-fill");
+    this.classList.toggle("bi-eye-slash-fill");
+});
+
+document.getElementById("emailinput").addEventListener("keydown", function(event){
+    if(event.key === "Enter"){
+        event.preventDefault();
+        passwordInput.focus();
+    }
+});
+
+loginForm.addEventListener("submit", function(e){
+    e.preventDefault();
+
+    const email = document.getElementById("emailinput").value.trim();
+    const password = passwordInput.value;
+
+    if(!email || !password){
+        alert("Please fill all fields");
+        return;
+    }
+
+    if(!email.includes("@") || !email.includes(".")){
+        alert("Please enter a valid email address");
+        return;
+    }
+
+    if(!passwordPattern.test(password)){
+        alert("Password must contain 8 characters, 1 capital letter, 1 number and 1 special character.");
+        return;
+    }
+
+    fetch(`${API_BASE_URL}/login/`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            email: email,
+            password: password
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        if(data.success){
+            if(data.user){
+                localStorage.setItem("user_id", data.user.id);
+                localStorage.setItem("profile", JSON.stringify({
+                    name: data.user.full_name || data.user.username,
+                    username: data.user.username,
+                    email: data.user.email,
+                    phone: data.user.phone || "",
+                    dob: data.user.dob || "",
+                    address: data.user.address || "No Address Saved",
+                    photo: "ananya.jpeg",
+                    memberSince: new Date().toLocaleString("en-IN", { month: "long", year: "numeric" })
+                }));
+            }
+
+            alert("Login Successful");
+            localStorage.setItem("selectedHomeTab", "women");
+            window.location.href = "home.html?tab=women";
+            return;
+        }
+
+        alert(data.message || "Invalid Email or Password");
+    })
+    .catch(error => {
+        console.log(error);
+        alert("Server Error");
+    });
+});
+</script>
+</body>
+</html>

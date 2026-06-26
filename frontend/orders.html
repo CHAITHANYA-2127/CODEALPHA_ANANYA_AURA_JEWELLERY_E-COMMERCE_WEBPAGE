@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Place Order - Ananya Aura</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins,sans-serif;
+}
+body{
+background:#0d0d0d;
+color:white;
+padding:20px;
+padding-bottom:105px;
+}
+.container{
+max-width:1000px;
+margin:auto;
+}
+h1{
+text-align:center;
+color:#d4af37;
+margin-bottom:25px;
+}
+.section{
+background:#1a1a1a;
+padding:20px;
+border-radius:15px;
+margin-bottom:20px;
+border:1px solid #333;
+}
+.section h2{
+color:#d4af37;
+margin-bottom:15px;
+}
+.order-item{
+display:flex;
+align-items:center;
+gap:15px;
+padding:15px 0;
+border-bottom:1px solid #333;
+}
+.order-item img{
+width:90px;
+height:90px;
+object-fit:cover;
+border-radius:10px;
+}
+.item-details{
+flex:1;
+}
+.price{
+color:#d4af37;
+font-weight:bold;
+}
+input,
+textarea, select{
+width:100%;
+padding:12px;
+margin-top:10px;
+margin-bottom:10px;
+border:none;
+border-radius:8px;
+background:#2a2a2a;
+color:white;
+}
+textarea{
+height:100px;
+resize:none;
+}
+.payment-option{
+margin:10px 0;
+padding:10px;
+background:#222;
+border-radius:8px;
+cursor:pointer;
+}
+.payment-option input{
+width:auto;
+margin-right:10px;
+}
+.upi-options{
+margin-left:25px;
+margin-top:10px;
+display:none;
+}
+.upi-options.active{
+display:block;
+}
+.upi-option{
+margin:8px 0;
+padding:8px;
+background:#1a1a1a;
+border-radius:6px;
+}
+.price-row{
+display:flex;
+justify-content:space-between;
+margin:10px 0;
+}
+.grand-total{
+font-size:22px;
+font-weight:bold;
+color:#d4af37;
+border-top:1px solid #444;
+padding-top:15px;
+margin-top:15px;
+}
+.place-btn{
+width:auto;
+min-width:220px;
+padding:12px 28px;
+border:none;
+border-radius:10px;
+background:#d4af37;
+color:black;
+font-size:16px;
+font-weight:bold;
+cursor:pointer;
+margin-top:0;
+}
+.place-btn:hover{
+opacity:.9;
+}
+.row{
+display:flex;
+gap:10px;
+}
+.row input{
+flex:1;
+}
+.success-popup{
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+background:#1a1a1a;
+padding:30px;
+border-radius:15px;
+border:2px solid #d4af37;
+text-align:center;
+z-index:999;
+display:none;
+}
+.success-popup h2{
+color:#d4af37;
+margin-bottom:15px;
+}
+@media(max-width:768px){
+.order-item{
+flex-direction:column;
+text-align:center;
+}
+.order-item img{
+width:120px;
+height:120px;
+}
+.row{
+flex-direction:column;
+gap:0;
+}
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<h1>🛍 Secure Checkout</h1>
+
+<!-- ADDRESS -->
+
+<div class="section">
+
+<h2>📍 Delivery Address</h2>
+
+<input type="text" id="name" placeholder="Full Name">
+
+<input type="tel" id="phone" placeholder="Phone Number">
+
+<input type="tel" id="altPhone" placeholder="Alternate Phone Number">
+
+<div class="row">
+
+<input type="text" id="house" placeholder="House No / Flat No">
+
+<input type="text" id="landmark" placeholder="Landmark">
+
+</div>
+
+<textarea
+id="address"
+placeholder="Street / Area"></textarea>
+
+<div class="row">
+
+<input type="text"
+id="city"
+placeholder="City">
+
+<input type="text"
+id="state"
+placeholder="State">
+
+</div>
+
+<input
+type="number"
+id="pincode"
+placeholder="Pincode">
+
+<label style="display:flex;align-items:center;gap:10px;margin-top:10px;">
+
+<input
+type="checkbox"
+checked
+style="width:auto;">
+
+Save this Address
+
+</label>
+
+</div>
+
+
+<!-- ORDER SUMMARY -->
+
+<div class="section">
+
+<h2>🛒 Order Summary</h2>
+
+<button
+type="button"
+onclick="chooseFromCart()"
+style="
+margin-bottom:15px;
+padding:12px 18px;
+background:#d4af37;
+color:#000;
+border:none;
+border-radius:8px;
+font-weight:bold;
+cursor:pointer;
+">
+Choose From Cart
+</button>
+
+<div id="orderItems"></div>
+
+</div>
+
+
+<!-- COUPON -->
+
+<div class="section">
+
+<h2>🎁 Coupon</h2>
+
+<div class="row">
+
+<input
+type="text"
+id="coupon"
+placeholder="Enter Coupon Code">
+
+<button
+onclick="applyCoupon()"
+style="width:160px;background:#d4af37;color:black;border:none;border-radius:8px;font-weight:bold;cursor:pointer;">
+
+Apply
+
+</button>
+
+</div>
+
+<p
+id="couponMsg"
+style="color:#00e676;margin-top:10px;"></p>
+
+</div>
+
+
+<!-- PAYMENT -->
+
+<div class="section">
+
+<h2>💳 Payment Method</h2>
+
+<div class="payment-option"
+onclick="selectPayment('cod')">
+
+<input
+type="radio"
+name="payment"
+id="cod"
+checked>
+
+Cash On Delivery
+
+</div>
+
+
+<div class="payment-option"
+onclick="selectPayment('upi')">
+
+<input
+type="radio"
+name="payment"
+id="upi">
+
+UPI Payment
+
+<div
+id="upiOptions"
+class="upi-options">
+
+<div class="upi-option">
+
+<input
+type="radio"
+name="upiApp"
+value="PhonePe">
+
+📱 PhonePe
+
+</div>
+
+<div class="upi-option">
+
+<input
+type="radio"
+name="upiApp"
+value="Google Pay">
+
+💙 Google Pay
+
+</div>
+
+<div class="upi-option">
+
+<input
+type="radio"
+name="upiApp"
+value="Paytm">
+
+💰 Paytm
+
+</div>
+
+<div class="upi-option">
+
+<input
+type="radio"
+name="upiApp"
+value="Amazon Pay">
+
+🛍 Amazon Pay
+
+</div>
+
+<div class="upi-option">
+
+<input
+type="radio"
+name="upiApp"
+value="BHIM">
+
+🇮🇳 BHIM UPI
+
+</div>
+
+<input
+type="text"
+placeholder="Enter UPI ID">
+
+</div>
+
+</div>
+
+
+<div class="payment-option"
+onclick="selectPayment('card')">
+
+<input
+type="radio"
+name="payment"
+id="card">
+
+Credit / Debit Card
+
+<div
+id="cardBox"
+class="upi-options">
+
+<input
+type="text"
+placeholder="Card Number">
+
+<input
+type="text"
+placeholder="Card Holder Name">
+
+<div class="row">
+
+<input
+type="text"
+placeholder="MM / YY">
+
+<input
+type="password"
+placeholder="CVV">
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="payment-option">
+
+<input
+type="radio"
+name="payment">
+
+Net Banking
+
+</div>
+
+</div>
+
+
+<!-- PRICE DETAILS -->
+
+<div class="section">
+
+<h2>💰 Price Details</h2>
+
+<div class="price-row">
+
+<span>Items Total</span>
+
+<span id="itemsTotal">₹0</span>
+
+</div>
+
+<div class="price-row">
+
+<span>Delivery Fee</span>
+
+<span>₹49</span>
+
+</div>
+
+<div class="price-row">
+
+<span>Platform Fee</span>
+
+<span>₹3</span>
+
+</div>
+
+<div class="price-row">
+
+<span>Discount</span>
+
+<span id="discount">-₹100</span>
+
+</div>
+
+<div class="price-row">
+
+<span>Estimated Delivery</span>
+
+<span>3 - 5 Days</span>
+
+</div>
+
+<div class="price-row grand-total">
+
+<span>Grand Total</span>
+
+<span id="grandTotal">₹0</span>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- STICKY BUTTON -->
+
+<div
+style="
+position:fixed;
+bottom:0;
+left:0;
+width:100%;
+background:#111;
+padding:12px 15px;
+border-top:2px solid #d4af37;
+display:flex;
+justify-content:center;
+z-index:1000;
+">
+
+<button
+class="place-btn"
+onclick="placeOrder()">
+
+Place Your Order
+
+</button>
+
+</div>
+<script>
+// ===========================
+// CHECKOUT DATA
+// ===========================
+
+let items = JSON.parse(localStorage.getItem("checkoutItems")) || [];
+
+let itemsTotal = 0;
+
+let discount = 100;
+
+let deliveryFee = 49;
+
+let platformFee = 3;
+
+let couponApplied = false;
+let userId = localStorage.getItem("user_id");
+
+function requireLogin(){
+if(!userId){
+alert("Please login first");
+window.location.href = "login.html";
+return false;
+}
+return true;
+}
+
+function prefillProfile(){
+if(!userId) return;
+
+fetch(`http://127.0.0.1:8000/profile/${userId}/`)
+.then(res => res.json())
+.then(user => {
+if(user.error) return;
+document.getElementById("name").value = user.full_name || user.username || "";
+document.getElementById("phone").value = user.phone || "";
+document.getElementById("address").value = user.address || "";
+document.getElementById("city").value = user.city || "";
+document.getElementById("state").value = user.state || "";
+document.getElementById("pincode").value = user.pincode || "";
+})
+.catch(error => console.log(error));
+}
+
+function chooseFromCart(){
+if(!requireLogin()) return;
+
+fetch(`http://127.0.0.1:8000/cart/${userId}/`)
+.then(res => res.json())
+.then(data => {
+if(!Array.isArray(data) || data.length === 0){
+alert("Your cart is empty");
+return;
+}
+
+items = data.map(item => ({
+id: item.id,
+product_id: item.product_id,
+name: item.name,
+price: Number(item.price) || 0,
+image: item.image || "",
+qty: Number(item.qty) || 1
+}));
+
+localStorage.setItem("checkoutItems", JSON.stringify(items));
+localStorage.setItem("checkoutSource", "cart");
+loadOrders();
+})
+.catch(error => {
+console.log(error);
+alert("Cart products could not be loaded");
+});
+}
+
+
+// ===========================
+// LOAD ORDER ITEMS
+// ===========================
+
+function loadOrders(){
+
+const container =
+document.getElementById("orderItems");
+
+container.innerHTML="";
+
+itemsTotal=0;
+
+if(items.length===0){
+
+container.innerHTML=`
+<p style="
+text-align:center;
+color:#999;
+padding:20px;
+">
+Your cart is empty
+</p>
+`;
+
+return;
+
+}
+
+items.forEach((item,index)=>{
+
+let qty=item.qty || 1;
+
+let subtotal=item.price*qty;
+
+itemsTotal+=subtotal;
+
+container.innerHTML+=`
+
+<div class="order-item">
+
+<img src="${item.image || 'ananya.jpeg'}" onerror="this.onerror=null;this.src='ananya.jpeg';">
+
+<div class="item-details">
+
+<h3>${item.name}</h3>
+
+<p>
+
+Quantity :
+
+<b>${qty}</b>
+
+</p>
+
+<p class="price">
+
+₹${subtotal}
+
+</p>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+updatePrice();
+
+}
+
+
+// ===========================
+// PRICE UPDATE
+// ===========================
+
+function updatePrice(){
+
+document.getElementById("itemsTotal").innerHTML=
+
+"₹"+itemsTotal;
+
+let grand=
+
+itemsTotal+
+
+deliveryFee+
+
+platformFee-
+
+discount;
+
+document.getElementById("grandTotal").innerHTML=
+
+"₹"+grand;
+
+}
+
+
+// ===========================
+// COUPON
+// ===========================
+
+function applyCoupon(){
+
+let code=
+
+document.getElementById("coupon")
+
+.value
+
+.trim()
+
+.toUpperCase();
+
+if(couponApplied){
+
+alert("Coupon already applied");
+
+return;
+
+}
+
+if(code==="ANANYA100"){
+
+discount+=100;
+
+couponApplied=true;
+
+document.getElementById("discount")
+
+.innerHTML=
+
+"-₹"+discount;
+
+document.getElementById("couponMsg")
+
+.innerHTML=
+
+"✅ Coupon Applied Successfully";
+
+updatePrice();
+
+}
+
+else{
+
+document.getElementById("couponMsg")
+
+.style.color="red";
+
+document.getElementById("couponMsg")
+
+.innerHTML=
+
+"❌ Invalid Coupon";
+
+}
+
+}
+
+
+// ===========================
+// PAYMENT
+// ===========================
+
+function selectPayment(type){
+
+document.getElementById(type).checked=true;
+
+document.getElementById("upiOptions")
+
+.classList.remove("active");
+
+document.getElementById("cardBox")
+
+.classList.remove("active");
+
+if(type==="upi"){
+
+document.getElementById("upiOptions")
+
+.classList.add("active");
+
+}
+
+if(type==="card"){
+
+document.getElementById("cardBox")
+
+.classList.add("active");
+
+}
+
+}
+
+
+// ===========================
+// PHONE VALIDATION
+// ===========================
+
+function validatePhone(phone){
+
+return /^[6-9]\d{9}$/
+
+.test(phone);
+
+}
+
+
+// ===========================
+// PINCODE VALIDATION
+// ===========================
+
+function validatePincode(pin){
+
+return /^[1-9][0-9]{5}$/
+
+.test(pin);
+
+}
+// ==========================
+// PLACE ORDER
+// ==========================
+
+function placeOrder(){
+if(!requireLogin()) return;
+
+let name=document.getElementById("name").value.trim();
+let phone=document.getElementById("phone").value.trim();
+let altPhone=document.getElementById("altPhone").value.trim();
+let house=document.getElementById("house").value.trim();
+let landmark=document.getElementById("landmark").value.trim();
+let address=document.getElementById("address").value.trim();
+let city=document.getElementById("city").value.trim();
+let state=document.getElementById("state").value.trim();
+let pincode=document.getElementById("pincode").value.trim();
+
+if(
+name===""||
+phone===""||
+house===""||
+address===""||
+city===""||
+state===""||
+pincode===""){
+alert("Please fill all delivery details");
+return;
+}
+
+if(!validatePhone(phone)){
+alert("Enter valid Phone Number");
+return;
+}
+
+if(altPhone!="" && !validatePhone(altPhone)){
+alert("Enter valid Alternate Number");
+return;
+}
+
+if(!validatePincode(pincode)){
+alert("Enter valid PIN Code");
+return;
+}
+
+if(items.length===0){
+alert("Your cart is empty");
+return;
+}
+let paymentMethod = "COD";
+
+if(document.getElementById("upi").checked){
+    paymentMethod = "UPI";
+}
+else if(document.getElementById("card").checked){
+    paymentMethod = "CARD";
+}
+
+let orderId =
+"ORD" + Date.now();
+
+let total =
+document.getElementById("grandTotal")
+.innerText
+.replace(/[^\d.]/g,"");
+
+let orderItems = items.map(item => ({
+    name: item.name,
+    price: Number(item.price) || 0,
+    qty: Number(item.qty) || 1,
+    image: item.image || ""
+}));
+
+let currentOrder = {
+    user_id: userId,
+    orderId: orderId,
+    address: {
+        name: name,
+        phone: phone,
+        altPhone: altPhone,
+        house: house,
+        landmark: landmark,
+        address: address,
+        city: city,
+        state: state,
+        pincode: pincode
+    },
+    payment: paymentMethod,
+    date: new Date().toLocaleDateString("en-IN"),
+    deliveryDate: "3 - 5 Days",
+    status: "Confirmed",
+    total: total,
+    items: orderItems
+};
+
+fetch("http://127.0.0.1:8000/place-order/",{
+    method:"POST",
+    headers:{
+        "Content-Type":"application/json"
+    },
+    body:JSON.stringify({
+        user_id: userId,
+        order_id: orderId,
+        customer_name: name,
+        phone: phone,
+        address: house + ", " + address,
+        city: city,
+        state: state,
+        pincode: pincode,
+   payment: paymentMethod,
+        total_amount: total,
+        status: "Confirmed",
+        clear_cart: localStorage.getItem("checkoutSource") === "cart",
+        items: orderItems
+    })
+})
+.then(res=>res.json())
+.then(data=>{
+
+    if(data.success){
+
+        alert("Order Saved Successfully");
+
+        localStorage.setItem(
+        "currentOrder",
+        JSON.stringify(currentOrder)
+        );
+
+        let savedOrders =
+        JSON.parse(localStorage.getItem("orders")) || [];
+
+        savedOrders.push(currentOrder);
+
+        localStorage.setItem(
+        "orders",
+        JSON.stringify(savedOrders)
+        );
+
+        localStorage.removeItem("cart");
+        localStorage.removeItem("checkoutItems");
+        localStorage.removeItem("checkoutSource");
+
+        window.location.href =
+        "success.html";
+    }
+    else{
+        alert("Order Failed");
+    }
+
+})
+.catch(error=>{
+    console.log(error);
+    alert("Server Error");
+});
+
+}
+
+// ==========================
+// START
+// ==========================
+
+prefillProfile();
+loadOrders();
+function placeOrderFromSavedCartDisabled(){
+
+    let userId =
+    localStorage.getItem("user_id");
+
+    let customerName =
+    document.getElementById(
+        "customerName"
+    ).value;
+
+    let phone =
+    document.getElementById(
+        "phone"
+    ).value;
+
+    fetch(
+    "http://127.0.0.1:8000/place-order/",
+    {
+
+        method:"POST",
+
+        headers:{
+            "Content-Type":
+            "application/json"
+        },
+
+        body:JSON.stringify({
+
+            user_id:userId,
+
+            customer_name:
+            customerName,
+
+            phone:phone
+
+        })
+
+    })
+
+    .then(res=>res.json())
+
+    .then(data=>{
+
+        if(data.success){
+
+            alert(
+            "✅ Order Placed\n\nOrder ID: "
+            + data.order_id
+            );
+
+            window.location.href =
+            "myorders.html";
+
+        }else{
+
+            alert(data.message);
+
+        }
+
+    });
+
+}
+let orderId =
+localStorage.getItem(
+"selectedOrder"
+);
+
+if(orderId){
+fetch(
+`http://127.0.0.1:8000/order-details/${orderId}/`
+)
+
+.then(res=>res.json())
+
+.then(data=>{
+
+let container =
+document.getElementById(
+"orderItems"
+);
+
+data.forEach(item=>{
+
+container.innerHTML += `
+
+<div class="product-card">
+
+<img src="${item.image}">
+
+<h3>${item.name}</h3>
+
+<p>₹${item.price}</p>
+
+<p>Qty: ${item.qty}</p>
+
+</div>
+
+`;
+
+});
+
+});
+}
+</script>
+
+</body>
+</html>

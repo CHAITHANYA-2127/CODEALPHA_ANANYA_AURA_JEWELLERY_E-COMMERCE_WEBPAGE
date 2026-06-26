@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>Track Order | Ananya Aura</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#0d0d0d;
+color:white;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+padding:30px 20px 100px;
+}
+
+.header{
+background:#181818;
+border:1px solid #333;
+border-radius:18px;
+padding:30px;
+text-align:center;
+margin-bottom:25px;
+}
+
+.header h1{
+color:#d4af37;
+font-size:32px;
+margin-bottom:10px;
+}
+
+.header p{
+color:#bbb;
+}
+
+.card{
+background:#181818;
+border:1px solid #333;
+border-radius:18px;
+padding:25px;
+margin-bottom:25px;
+}
+
+.card h2{
+color:#d4af37;
+margin-bottom:20px;
+}
+
+.row{
+display:flex;
+justify-content:space-between;
+padding:12px 0;
+border-bottom:1px solid #333;
+}
+
+.row:last-child{
+border-bottom:none;
+}
+
+.label{
+color:#999;
+}
+
+.value{
+font-weight:600;
+}
+
+.timeline{
+
+position:relative;
+
+margin-top:30px;
+
+padding-left:35px;
+
+}
+
+.timeline::before{
+
+content:"";
+
+position:absolute;
+
+left:14px;
+
+top:0;
+
+bottom:0;
+
+width:4px;
+
+background:#333;
+
+}
+
+.step{
+
+position:relative;
+
+margin-bottom:45px;
+
+}
+
+.step:last-child{
+
+margin-bottom:0;
+
+}
+
+.circle{
+
+position:absolute;
+
+left:-28px;
+
+width:28px;
+
+height:28px;
+
+border-radius:50%;
+
+background:#444;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+font-size:15px;
+
+font-weight:bold;
+
+}
+
+.active{
+
+background:#28a745;
+
+}
+
+.pending{
+
+background:#666;
+
+}
+
+.step h3{
+
+margin-bottom:6px;
+
+}
+
+.step p{
+
+color:#aaa;
+
+font-size:14px;
+
+line-height:22px;
+
+}
+
+.products{
+
+margin-top:25px;
+
+display:flex;
+
+flex-direction:column;
+
+gap:15px;
+
+}
+
+.product{
+
+display:flex;
+
+gap:15px;
+
+background:#222;
+
+padding:15px;
+
+border-radius:12px;
+
+align-items:center;
+
+}
+
+.product img{
+
+width:85px;
+
+height:85px;
+
+object-fit:cover;
+
+border-radius:10px;
+
+}
+
+.info{
+
+flex:1;
+
+}
+
+.info h3{
+
+margin-bottom:8px;
+
+}
+
+.price{
+
+font-size:18px;
+
+font-weight:bold;
+
+color:#d4af37;
+
+}
+
+@media(max-width:768px){
+
+.row{
+
+flex-direction:column;
+
+gap:5px;
+
+}
+
+.header h1{
+
+font-size:26px;
+
+}
+
+.product{
+
+flex-direction:column;
+
+text-align:center;
+
+}
+
+.product img{
+
+width:120px;
+
+height:120px;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="header">
+
+<h1>📦 Track Your Order</h1>
+
+<p>Your jewellery is on the way 💎</p>
+
+</div>
+
+<div class="card">
+
+<h2>Order Details</h2>
+
+<div class="row">
+<span class="label">Order ID</span>
+<span class="value" id="orderId">Loading...</span>
+</div>
+
+<div class="row">
+<span class="label">Customer</span>
+<span class="value" id="customerName">Loading...</span>
+</div>
+
+<div class="row">
+<span class="label">Payment</span>
+<span class="value" id="paymentMethod">Loading...</span>
+</div>
+
+<div class="row">
+<span class="label">Expected Delivery</span>
+<span class="value" id="deliveryDate">Loading...</span>
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Tracking Status</h2>
+
+<div class="timeline">
+
+<div class="step">
+
+<div class="circle active">✓</div>
+
+<h3>Order Confirmed</h3>
+
+<p>Your order has been confirmed.</p>
+
+</div>
+
+<div class="step">
+
+<div class="circle active">✓</div>
+
+<h3>Packed</h3>
+
+<p>Your jewellery has been packed securely.</p>
+
+</div>
+
+<div class="step">
+
+<div class="circle pending">🚚</div>
+
+<h3>Shipped</h3>
+
+<p>Waiting for shipment update.</p>
+
+</div>
+
+<div class="step">
+
+<div class="circle pending">🏠</div>
+
+<h3>Out for Delivery</h3>
+
+<p>Your order will reach you soon.</p>
+
+</div>
+
+<div class="step">
+
+<div class="circle pending">❤</div>
+
+<h3>Delivered</h3>
+
+<p>Enjoy your jewellery.</p>
+
+</div>
+
+</div>
+
+</div>
+<!-- DELIVERY ADDRESS -->
+
+<div class="card">
+
+<h2>📍 Delivery Address</h2>
+
+<div id="addressBox">
+
+<p><b id="addressName">Loading...</b></p>
+
+<p id="addressPhone">Loading...</p>
+
+<p id="fullAddress" style="margin-top:10px;color:#bbb;line-height:28px;">
+
+Loading...
+
+</p>
+
+</div>
+
+</div>
+
+
+<!-- ORDER ITEMS -->
+
+<div class="card">
+
+<h2>🛍 Ordered Products</h2>
+
+<div id="orderedProducts" class="products">
+
+<!-- JavaScript Loads Products -->
+
+</div>
+
+</div>
+
+
+<!-- PAYMENT SUMMARY -->
+
+<div class="card">
+
+<h2>💳 Payment Summary</h2>
+
+<div class="row">
+
+<span class="label">
+
+Payment Method
+
+</span>
+
+<span class="value"
+
+id="payMethod">
+
+Loading...
+
+</span>
+
+</div>
+
+<div class="row">
+
+<span class="label">
+
+Order Total
+
+</span>
+
+<span class="value"
+
+id="orderTotal">
+
+₹0
+
+</span>
+
+</div>
+
+<div class="row">
+
+<span class="label">
+
+Order Status
+
+</span>
+
+<span
+class="value"
+style="color:#2ecc71;">
+
+Confirmed
+
+</span>
+
+</div>
+
+</div>
+
+
+<!-- BUTTONS -->
+
+<div
+style="
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:15px;
+margin-top:30px;
+">
+
+<button
+
+onclick="cancelOrder()"
+
+style="
+
+padding:15px;
+
+background:#e53935;
+
+color:white;
+
+border:none;
+
+border-radius:12px;
+
+font-size:17px;
+
+font-weight:600;
+
+cursor:pointer;
+
+">
+
+❌ Cancel Order
+
+</button>
+
+
+<button
+
+onclick="location.href='home.html'"
+
+style="
+
+padding:15px;
+
+background:#d4af37;
+
+color:black;
+
+border:none;
+
+border-radius:12px;
+
+font-size:17px;
+
+font-weight:600;
+
+cursor:pointer;
+
+">
+
+🏠 Back To Home
+
+</button>
+
+</div>
+
+
+<!-- FOOTER -->
+
+<div
+
+style="
+
+margin-top:35px;
+
+padding:20px;
+
+background:#181818;
+
+border:1px solid #333;
+
+border-radius:15px;
+
+text-align:center;
+
+">
+
+<h3 style="color:#d4af37;">
+
+Thank You ❤️
+
+</h3>
+
+<p
+
+style="
+
+margin-top:12px;
+
+color:#aaa;
+
+line-height:28px;
+
+">
+
+Your jewellery is being packed carefully.
+
+You'll receive shipping updates soon.
+
+Thank you for choosing
+
+<b>Ananya Aura.</b>
+
+</p>
+
+</div>
+
+</div>
+
+
+<script>
+
+// =============================
+// LOAD CURRENT ORDER
+// =============================
+
+const order = JSON.parse(localStorage.getItem("currentOrder"));
+
+if (!order) {
+    alert("No order found!");
+    window.location.href = "home.html";
+}
+
+// =============================
+// ORDER DETAILS
+// =============================
+
+document.getElementById("orderId").textContent = order.orderId;
+document.getElementById("customerName").textContent = order.address.name;
+document.getElementById("paymentMethod").textContent = order.payment;
+document.getElementById("deliveryDate").textContent = order.deliveryDate;
+
+document.getElementById("addressName").textContent =
+    order.address.name;
+
+document.getElementById("addressPhone").textContent =
+    order.address.phone;
+
+document.getElementById("fullAddress").innerHTML =
+`
+${order.address.house},
+${order.address.landmark}<br>
+${order.address.address}<br>
+${order.address.city},
+${order.address.state} - ${order.address.pincode}
+`;
+
+document.getElementById("payMethod").textContent =
+order.payment;
+
+document.getElementById("orderTotal").innerHTML =
+"₹" + order.total;
+
+// =============================
+// LOAD PRODUCTS
+// =============================
+
+const productBox =
+document.getElementById("orderedProducts");
+
+productBox.innerHTML = "";
+
+order.items.forEach(item=>{
+
+let qty=item.qty || 1;
+
+productBox.innerHTML +=
+
+`
+<div class="product">
+
+<img src="${item.image}">
+
+<div class="info">
+
+<h3>${item.name}</h3>
+
+<p>
+
+Quantity :
+<b>${qty}</b>
+
+</p>
+
+<p class="price">
+
+₹${item.price*qty}
+
+</p>
+
+</div>
+
+</div>
+`;
+
+});
+
+// =============================
+// TRACKING STATUS
+// =============================
+
+const steps =
+document.querySelectorAll(".circle");
+
+let status =
+order.status || "Confirmed";
+
+switch(status){
+
+case "Confirmed":
+
+steps[0].classList.add("active");
+
+break;
+
+case "Packed":
+
+steps[0].classList.add("active");
+steps[1].classList.add("active");
+
+break;
+
+case "Shipped":
+
+steps[0].classList.add("active");
+steps[1].classList.add("active");
+steps[2].classList.remove("pending");
+steps[2].classList.add("active");
+
+break;
+
+case "Out For Delivery":
+
+steps[0].classList.add("active");
+steps[1].classList.add("active");
+steps[2].classList.add("active");
+steps[3].classList.remove("pending");
+steps[3].classList.add("active");
+
+break;
+
+case "Delivered":
+
+steps.forEach(step=>{
+
+step.classList.remove("pending");
+step.classList.add("active");
+
+});
+
+break;
+
+}
+
+// =============================
+// CANCEL ORDER
+// =============================
+
+function cancelOrder(){
+
+if(order.status==="Shipped" ||
+order.status==="Out For Delivery" ||
+order.status==="Delivered"){
+
+alert("Sorry! Order can't be cancelled.");
+
+return;
+
+}
+
+if(confirm("Are you sure you want to cancel this order?")){
+
+order.status="Cancelled";
+
+localStorage.setItem(
+"currentOrder",
+JSON.stringify(order)
+);
+
+let orders=
+JSON.parse(localStorage.getItem("orders")) || [];
+
+orders=orders.map(o=>{
+
+if(o.orderId===order.orderId){
+
+o.status="Cancelled";
+
+}
+
+return o;
+
+});
+
+localStorage.setItem(
+"orders",
+JSON.stringify(orders)
+);
+
+alert("Order Cancelled Successfully");
+
+window.location.href="myorders.html";
+
+}
+
+}
+
+// =============================
+// AUTO STATUS UPDATE (DEMO)
+// =============================
+
+const demoProgress = [
+    "Confirmed",
+    "Packed",
+    "Shipped",
+    "Out For Delivery",
+    "Delivered"
+];
+
+// Uncomment below only for demo
+/*
+let index = demoProgress.indexOf(order.status);
+
+setInterval(() => {
+
+if(index < demoProgress.length-1){
+
+index++;
+
+order.status = demoProgress[index];
+
+localStorage.setItem(
+"currentOrder",
+JSON.stringify(order)
+);
+
+location.reload();
+
+}
+
+},10000);
+*/
+
+// =============================
+// PAGE LOAD
+// =============================
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+</script>
+
+</body>
+
+</html>

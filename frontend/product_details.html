@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details</title>
+
+    <link rel="stylesheet" href="product_details.css">
+
+    <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    background:#f5f5f5;
+}
+
+/* HEADER */
+
+.header{
+    background:#111;
+    color:white;
+    text-align:center;
+    padding:20px;
+    box-shadow:0 2px 10px rgba(0,0,0,0.2);
+}
+
+.header h1{
+    font-size:30px;
+}
+
+/* MAIN CONTAINER */
+
+.container{
+    max-width:1200px;
+    margin:40px auto;
+    background:white;
+    border-radius:15px;
+    padding:30px;
+    display:flex;
+    gap:40px;
+    box-shadow:0 0 15px rgba(0,0,0,0.1);
+}
+
+/* IMAGE SECTION */
+
+.left{
+    flex:1;
+}
+
+.left img{
+    width:100%;
+    max-height:550px;
+    object-fit:cover;
+    border-radius:12px;
+    border:1px solid #ddd;
+}
+
+/* DETAILS SECTION */
+
+.right{
+    flex:1;
+}
+
+#productName{
+    font-size:35px;
+    margin-bottom:15px;
+    color:#222;
+}
+
+#productPrice{
+    font-size:30px;
+    color:#28a745;
+    margin-bottom:15px;
+}
+
+#productCategory{
+    font-size:18px;
+    color:#666;
+    margin-bottom:15px;
+}
+
+#productDescription{
+    font-size:16px;
+    line-height:1.8;
+    color:#444;
+    margin-bottom:25px;
+}
+
+/* BUTTONS */
+
+.btn{
+    width:250px;
+    padding:14px;
+    border:none;
+    border-radius:8px;
+    font-size:16px;
+    cursor:pointer;
+    margin-bottom:12px;
+    transition:0.3s;
+}
+
+.cart-btn{
+    background:#ff9800;
+    color:white;
+}
+
+.cart-btn:hover{
+    background:#e68900;
+}
+
+.wishlist-btn{
+    background:#e91e63;
+    color:white;
+}
+
+.wishlist-btn:hover{
+    background:#d81b60;
+}
+
+.buy-btn{
+    background:#28a745;
+    color:white;
+}
+
+.buy-btn:hover{
+    background:#218838;
+}
+
+/* BACK BUTTON */
+
+.right a{
+    text-decoration:none;
+    color:#007bff;
+    font-weight:bold;
+}
+
+.right a:hover{
+    text-decoration:underline;
+}
+
+/* MOBILE RESPONSIVE */
+
+@media(max-width:768px){
+
+    .container{
+        flex-direction:column;
+        margin:20px;
+        padding:20px;
+    }
+
+    .left img{
+        max-height:350px;
+    }
+
+    .btn{
+        width:100%;
+    }
+
+    #productName{
+        font-size:28px;
+    }
+
+    #productPrice{
+        font-size:24px;
+    }
+}
+
+
+</style>
+<body>
+
+    <header class="header">
+        <h1>Ananya Aura Jewellery</h1>
+    </header>
+
+    <div class="container">
+
+        <div class="left">
+
+            <img
+            id="productImage"
+            src=""
+            alt="Product">
+
+        </div>
+
+        <div class="right">
+
+            <h1 id="productName">
+                Loading...
+            </h1>
+
+            <h2 id="productPrice">
+                ₹0
+            </h2>
+
+            <p id="productCategory">
+                Category
+            </p>
+
+            <p id="productDescription">
+                Product Description
+            </p>
+
+            <button
+            id="cartBtn"
+            class="btn cart-btn">
+                🛒 Add To Cart
+            </button>
+
+            <button
+            id="wishlistBtn"
+            class="btn wishlist-btn">
+                ❤️ Add To Wishlist
+            </button>
+
+            <button
+            id="buyBtn"
+            class="btn buy-btn">
+                ⚡ Buy Now
+            </button>
+
+            <br><br>
+
+            <a href="home.html">
+                ← Back To Home
+            </a>
+
+        </div>
+
+    </div>
+
+    <script src="product_details.js"></script>
+<script>
+
+const params = new URLSearchParams(window.location.search);
+
+const productId = params.get("id");
+
+let currentProduct = JSON.parse(localStorage.getItem("selectedProduct") || "null");
+
+function setProduct(product) {
+    if (!product || product.error) {
+        return false;
+    }
+
+    currentProduct = {
+        id: product.id || "",
+        name: product.name || "Product",
+        price: Number(product.price) || 0,
+        image: product.image || "ananya.jpeg",
+        category: product.category || "Jewellery",
+        description: product.description || "Premium jewellery collection from Ananya Aura."
+    };
+
+    localStorage.setItem("selectedProduct", JSON.stringify(currentProduct));
+
+    const image = document.getElementById("productImage");
+    image.src = currentProduct.image;
+    image.onerror = function() {
+        this.onerror = null;
+        this.src = "ananya.jpeg";
+    };
+
+    document.getElementById("productName").innerText = currentProduct.name;
+    document.getElementById("productPrice").innerText =
+    "Rs " + currentProduct.price.toLocaleString("en-IN");
+    document.getElementById("productCategory").innerText =
+    "Category : " + currentProduct.category;
+    document.getElementById("productDescription").innerText =
+    currentProduct.description;
+
+    return true;
+}
+
+if (!setProduct(currentProduct)) {
+    setProduct({
+        name: localStorage.getItem("productName") || "Product Not Found",
+        price: localStorage.getItem("productPrice") || 0,
+        image: localStorage.getItem("productImage") || "ananya.jpeg",
+        category: "Jewellery",
+        description: "Please open a product from the home page."
+    });
+}
+
+if (productId) {
+fetch(`http://127.0.0.1:8000/product/${productId}/`)
+.then(response => {
+    if (!response.ok) {
+        throw new Error("Product request failed");
+    }
+
+    return response.json();
+})
+.then(product => {
+
+    currentProduct = product;
+
+    document.getElementById("productImage").src =
+    product.image;
+
+    document.getElementById("productName").innerText =
+    product.name;
+
+    document.getElementById("productPrice").innerText =
+    "₹" + Number(product.price).toLocaleString("en-IN");
+
+    document.getElementById("productCategory").innerText =
+    "Category : " + product.category;
+
+    document.getElementById("productDescription").innerText =
+    product.description;
+
+})
+.catch(error => {
+
+    console.log(error);
+
+    if (!currentProduct || currentProduct.name === "Product Not Found") {
+        alert("Product Not Found");
+    }
+
+});
+}
+
+document.getElementById("cartBtn")
+.addEventListener("click", function(){
+
+    let cart =
+    JSON.parse(localStorage.getItem("cart")) || [];
+
+    let existing =
+    cart.find(item => item.name === currentProduct.name);
+
+    if(existing){
+
+        existing.qty += 1;
+
+    }else{
+
+        cart.push({
+            name: currentProduct.name,
+            price: currentProduct.price,
+            image: currentProduct.image,
+            qty: 1
+        });
+
+    }
+
+    localStorage.setItem(
+        "cart",
+        JSON.stringify(cart)
+    );
+
+    alert("🛒 Added To Cart");
+
+});
+
+document.getElementById("wishlistBtn")
+.addEventListener("click", function(){
+
+    let wishlist =
+    JSON.parse(localStorage.getItem("wishlist")) || [];
+
+    let exists =
+    wishlist.find(item =>
+    item.name === currentProduct.name);
+
+    if(exists){
+
+        alert("❤️ Already In Wishlist");
+        return;
+
+    }
+
+    wishlist.push({
+        name: currentProduct.name,
+        price: currentProduct.price,
+        image: currentProduct.image
+    });
+
+    localStorage.setItem(
+        "wishlist",
+        JSON.stringify(wishlist)
+    );
+
+    alert("❤️ Added To Wishlist");
+
+});
+
+document.getElementById("buyBtn")
+.addEventListener("click", function(){
+
+    let item = [{
+
+        name: currentProduct.name,
+        price: currentProduct.price,
+        image: currentProduct.image,
+        qty: 1
+
+    }];
+
+    localStorage.setItem(
+        "checkoutItems",
+        JSON.stringify(item)
+    );
+
+    window.location.href =
+    "orders.html";
+
+});
+
+
+</script>
+</body>
+</html>
+

@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ananya Aura Jewellery</title>
+
+    <link rel="stylesheet" href="home.css">
+
+    <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+
+<body>
+
+    <!-- HEADER -->
+
+    <header class="header">
+
+        <div class="logo-section">
+
+            <img src="ananya.jpeg" alt="Ananya Aura" class="logo">
+
+            <div class="brand">
+                <h1>ANANYA AURA JEWELLERY</h1>
+                <p>Timeless Elegance ✨</p>
+            </div>
+
+        </div>
+      <a href="cart.html" class="cart-box">
+    <i class="bi bi-cart3"></i>
+    <span id="cartCount">0</span>
+</a>
+    </header>
+   
+    <!-- SEARCH -->
+
+    <section class="search-section">
+
+        <div class="search-box">
+
+            <i class="bi bi-search"></i>
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search Jewellery..."
+                onkeyup="searchProducts()">
+
+<div class="header-actions">
+<a href="wishlist.html" class="wishlist-btn">
+❤️ <span id="wishlistCount">0</span>
+</a>
+
+</div>
+</section>
+    <!-- BANNER -->
+
+    <section class="banner">
+
+        <h2>Luxury Jewellery Collection</h2>
+
+        <p>
+            Discover timeless beauty crafted for every occasion.
+        </p>
+        <h2>✨ New Arrivals 2026 ✨</h2>
+<p>Exclusive Jewellery Collection For Men & Women</p>
+<button onclick="scrollToProducts()">
+    Shop Now
+</button>
+
+    </section>
+
+    <!-- TABS -->
+
+    <section class="tabs">
+
+        <button
+            id="womenBtn"
+            class="active-tab"
+            onclick="showWomen()">
+
+            Women
+
+        </button>
+
+        <button
+            id="menBtn"
+            onclick="showMen()">
+
+            Men
+
+        </button>
+
+    </section>
+<!-- WOMEN PRODUCTS -->
+
+<section id="womenProducts" class="products">
+
+<div class="product-card">
+<img src="Maang Tikka.jpeg" onclick="openProduct('Maang Tikka',4999,'Maang Tikka.jpeg')" style="cursor:pointer;">
+<h3>Maang Tikka</h3>
+<p>₹4,999</p>
+<button onclick="addToCart('Maang Tikka',4999,'Maang Tikka.jpeg')">Add To Cart</button>
+<button onclick="addToWishlist('Maang Tikka',4999,'Maang Tikka.jpeg')">❤️ Wishlist</button>
+<button onclick="buyNow('Maang Tikka',4999,'Maang Tikka.jpeg')">⚡ Buy Now</button>
+</div>
+
+<div class="product-card">
+<img src="Maang Tikka1.jpeg" onclick="openProduct('Traditional Maang Tikka',5499,'Maang Tikka1.jpeg')" style="cursor:pointer;">
+<h3>Traditional Maang Tikka</h3>
+<p>₹5,499</p>
+<button onclick="addToCart('Traditional Maang Tikka',5499,'Maang Tikka1.jpeg')">Add To Cart</button>
+<button onclick="addToWishlist('Traditional Maang Tikka',5499,'Maang Tikka1.jpeg')">❤️ Wishlist</button>
+<button onclick="buyNow('Traditional Maang Tikka',5499,'Maang Tikka1.jpeg')">⚡ Buy Now</button>
+</div>
+
+<div class="product-card">
+<img src="Maang Tikka2.jpeg" onclick="openProduct('Bridal Maang Tikka',6999,'Maang Tikka2.jpeg')" style="cursor:pointer;">
+<h3>Bridal Maang Tikka</h3>
+<p>₹6,999</p>
+<button onclick="addToCart('Bridal Maang Tikka',6999,'Maang Tikka2.jpeg')">Add To Cart</button>
+<button onclick="addToWishlist('Bridal Maang Tikka',6999,'Maang Tikka2.jpeg')">❤️ Wishlist</button>
+<button onclick="buyNow('Bridal Maang Tikka',6999,'Maang Tikka2.jpeg')">⚡ Buy Now</button> 
+</div>
+
+<div class="product-card">
+<img src="Matha Patti.jpeg" onclick="openProduct('Matha Patti',5999,'Matha Patti.jpeg')" style="cursor:pointer;">
+<h3>Matha Patti</h3>
+<p>₹5,999</p>
+<button onclick="addToCart('Matha Patti',5999,'Matha Patti.jpeg')">Add To Cart</button>
+<button onclick="addToWishlist('Matha Patti',5999,'Matha Patti.jpeg')">❤️ Wishlist</button>
+<button onclick="buyNow('Matha Patti',5999,'Matha Patti.jpeg')">⚡ Buy Now</button>
+</div>
+
+<div class="product-card">
+<img src="Matha Patti1.jpeg" onclick="openProduct('Traditional Matha Patti',6499,'Matha Patti1.jpeg')" style="cursor:pointer;">
+<h3>Traditional Matha Patti</h3>
+<p>₹6,499</p>
+<button onclick="addToCart('Traditional Matha Patti',6499,'Matha Patti1.jpeg')">Add To Cart</button>
+<button onclick="addToWishlist('Traditional Matha Patti',6499,'Matha Patti1.jpeg')">❤️ Wishlist</button>
+<button onclick="buyNow('Traditional Matha Patti',6499,'Matha Patti1.jpeg')">⚡ Buy Now</button>
+</div>
+
+<div class="product-card">
+<img src="Matha Patti2.jpeg" onclick="openProduct('Bridal Matha Patti',7999,'Matha Patti2.jpeg')" style="cursor:pointer;">
+<h3>Bridal Matha Patti</h3>
+<p>₹7,999</p>
+<button onclick="addToCart('Bridal Matha Patti',7999,'Matha Patti2.jpeg')">Add To Cart</button>
+<button onclick="addToWishlist('Bridal Matha Patti',7999,'Matha Patti2.jpeg')">❤️ Wishlist</button>
+<button onclick="buyNow('Bridal Matha Patti',7999,'Matha Patti2.jpeg')">⚡ Buy Now</button>
+</div>
+
+<div class="product-card">
+<img src="Headband_Tiara.jpeg" onclick="openProduct('Headband Tiara',4999,'Headband_Tiara.jpeg')" style="cursor:pointer;">
+<h3>Headband Tiara</h3>
+<p>₹4,999</p>
+<button onclick="addToCart('Headband Tiara',4999,'Headband_Tiara.jpeg')">Add To Cart</button>
+<button onclick="addToWishlist('Headband Tiara',4999,'Headband_Tiara.jpeg')">❤️ Wishlist</button>
+<button onclick="buyNow('Headband Tiara',4999,'Headband_Tiara.jpeg')">⚡ Buy Now</button>
+</div>
+
+<div class="product-card">
+<img src="Headband_Tiara1.jpeg" onclick="openProduct('Royal Tiara',5999,'Headband_Tiara1.jpeg')" style="cursor:pointer;">
+<h3>Royal Tiara</h3>
+<p>₹5,999</p>
+<button onclick="addToCart('Royal Tiara',5999,'Headband_Tiara1.jpeg')">Add To Cart</button>
+<button onclick="addToWishlist('Royal Tiara',5999,'Headband_Tiara1.jpeg')">❤️ Wishlist</button>
+<button onclick="buyNow('Royal Tiara',5999,'Headband_Tiara1.jpeg')">⚡ Buy Now</button>
+</div>
+
+<div class="product-card">
+<img src="Earrings.jpeg" onclick="openProduct('Earrings',2999,'Earrings.jpeg')" style="cursor:pointer;">
+<h3>Earrings</h3>
+<p>₹2,999</p>
+<button onclick="addToCart('Earrings',2999,'Earrings.jpeg')">Add To Cart</button>
+<button onclick="addToWishlist('Earrings',2999,'Earrings.jpeg')">❤️ Wishlist</button>
+<button onclick="buyNow('Earrings',2999,'Earrings.jpeg')">⚡ Buy Now</button>
+</div>
+
+<div class="product-card">
+<img src="Earrings1.jpeg" onclick="openProduct('Jhumka Earrings',3499,'Earrings1.jpeg')" style="cursor:pointer;">
+<h3>Jhumka Earrings</h3>
+<p>₹3,499</p>
+<button onclick="addToCart('Jhumka Earrings',3499,'Earrings1.jpeg')">Add To Cart</button>
+<button onclick="addToWishlist('Jhumka Earrings',3499,'Earrings1.jpeg')">❤️ Wishlist</button>
+<button onclick="buyNow('Jhumka Earrings',3499,'Earrings1.jpeg')">⚡ Buy Now</button>
+</div>
+
+<div class="product-card">
+<img src="Earrings2.jpeg" onclick="openProduct('Diamond Earrings',8999,'Earrings2.jpeg')" style="cursor:pointer;">
+<h3>Diamond Earrings</h3>
+<p>₹8,999</p>
+<button onclick="addToCart('Diamond Earrings',8999,'Earrings2.jpeg')">Add To Cart</button>
+<button onclick="addToWishlist('Diamond Earrings',8999,'Earrings2.jpeg')">❤️ Wishlist</button>
+<button onclick="buyNow('Diamond Earrings',8999,'Earrings2.jpeg')">⚡ Buy Now</button>
+</div>
+
+<div class="product-card">
+<img src="Earrings3.jpeg" onclick="openProduct('Gold Earrings',7999,'Earrings3.jpeg')" style="cursor:pointer;">
+<h3>Gold Earrings</h3>
+<p>₹7,999</p>
+<button onclick="addToCart('Gold Earrings',7999,'Earrings3.jpeg')">Add To Cart</button>
+<button onclick="addToWishlist('Gold Earrings',7999,'Earrings3.jpeg')">❤️ Wishlist</button>
+<button onclick="buyNow('Gold Earrings',7999,'Earrings3.jpeg')">⚡ Buy Now</button> 
+</div>
+
+<div class="product-card">
+<img src="Earrings4.jpeg" onclick="openProduct('Pearl Earrings',4999,'Earrings4.jpeg')" style="cursor:pointer;">
+<h3>Pearl Earrings</h3>
+<p>₹4,999</p>
+<button onclick="addToCart('Pearl Earrings',4999,'Earrings4.jpeg')">Add To Cart</button>
+<button onclick="addToWishlist('Pearl Earrings',4999,'Earrings4.jpeg')">❤️ Wishlist</button>
+<button onclick="buyNow('Pearl Earrings',4999,'Earrings4.jpeg')">⚡ Buy Now</button>
+</div>
+
+<div class="product-card">
+<img src="Earrings5.jpeg" onclick="openProduct('Stud Earrings',2499,'Earrings5.jpeg')" style="cursor:pointer;">
+<h3>Stud Earrings</h3>
+<p>₹2,499</p>
+<button onclick="addToCart('Stud Earrings',2499,'Earrings5.jpeg')">Add To Cart</button>
+<button onclick="addToWishlist('Stud Earrings',2499,'Earrings5.jpeg')">❤️ Wishlist</button>
+<button onclick="buyNow('Stud Earrings',2499,'Earrings5.jpeg')">⚡ Buy Now</button>
+</div>
+
+<div class="product-card">
+<img src="Nose Pin.jpeg" onclick="openProduct('Nose Pin',1999,'Nose Pin.jpeg')" style="cursor:pointer;">
+<h3>Nose Pin</h3>
+<p>₹1,999</p>
+<button onclick="addToCart('Nose Pin',1999,'Nose Pin.jpeg')">Add To Cart</button>
+<button onclick="addToWishlist('Nose Pin',1999,'Nose Pin.jpeg')">❤️ Wishlist</button>
+<button onclick="buyNow('Nose Pin',1999,'Nose Pin.jpeg')">⚡ Buy Now</button>
+</div>
+
+<div class="product-card">
+<img src="Nose Pin1.jpeg" onclick="openProduct('Diamond Nose Pin',3999,'Nose Pin1.jpeg')" style="cursor:pointer;">
+<h3>Diamond Nose Pin</h3>
+<p>₹3,999</p>
+<button onclick="addToCart('Diamond Nose Pin',3999,'Nose Pin1.jpeg')">Add To Cart</button>
+<button onclick="addToWishlist('Diamond Nose Pin',3999,'Nose Pin1.jpeg')">❤️ Wishlist</button>
+<button onclick="buyNow('Diamond Nose Pin',3999,'Nose Pin1.jpeg')">⚡ Buy Now</button>
+</div>
+
+<div class="product-card">
+<img src="Nose Pin2.jpeg" onclick="openProduct('Gold Nose Pin',2999,'Nose Pin2.jpeg')" style="cursor:pointer;">
+<h3>Gold Nose Pin</h3>
+<p>₹2,999</p>
+<button onclick="addToCart('Gold Nose Pin',2999,'Nose Pin2.jpeg')">Add To Cart</button>
+<button onclick="addToWishlist('Gold Nose Pin',2999,'Nose Pin2.jpeg')">❤️ Wishlist</button>
+<button onclick="buyNow('Gold Nose Pin',2999,'Nose Pin2.jpeg')">⚡ Buy Now</button>
+</div>
+
+<div class="product-card">
+<img src="Choker.jpeg" onclick="openProduct('Choker',9999,'Choker.jpeg')" style="cursor:pointer;">
+<h3>Choker</h3>
+<p>₹9,999</p>
+<button onclick="addToCart('Choker',9999,'Choker.jpeg')">Add To Cart</button>
+<button onclick="addToWishlist('Choker',9999,'Choker.jpeg')">❤️ Wishlist</button>
+<button onclick="buyNow('Choker',9999,'Choker.jpeg')">⚡ Buy Now</button>
+</div>
+
+<div class="product-card">
+<img src="Choker1.jpeg" onclick="openProduct('Bridal Choker',12999,'Choker1.jpeg')" style="cursor:pointer;">
+<h3>Bridal Choker</h3>
+<p>₹12,999</p>
+<button onclick="addToCart('Bridal Choker',12999,'Choker1.jpeg')">Add To Cart</button>
+<button onclick="addToWishlist('Bridal Choker',12999,'Choker1.jpeg')">❤️ Wishlist</button>
+<button onclick="buyNow('Bridal Choker',12999,'Choker1.jpeg')">⚡ Buy Now</button>
+</div>
+
+<div class="product-card">
+<img src="Necklace.jpeg" onclick="openProduct('Necklace',14999,'Necklace.jpeg')" style="cursor:pointer;">
+<h3>Necklace</h3>
+<p>₹14,999</p>
+<button onclick="addToCart('Necklace',14999,'Necklace.jpeg')">Add To Cart</button>
+<button onclick="addToWishlist('Necklace',14999,'Necklace.jpeg')">❤️ Wishlist</button>
+<button onclick="buyNow('Necklace',14999,'Necklace.jpeg')">⚡ Buy Now</button>
+</div>
+
+<div class="product-card">
+<img src="Pendant.jpeg" onclick="openProduct('Pendant',5999,'Pendant.jpeg')" style="cursor:pointer;">
+<h3>Pendant</h3>
+<p>₹5,999</p>
+<button onclick="addToCart('Pendant',5999,'Pendant.jpeg')">Add To Cart</button>
+<button onclick="addToWishlist('Pendant',5999,'Pendant.jpeg')">❤️ Wishlist</button>
+<button onclick="buyNow('Pendant',5999,'Pendant.jpeg')">⚡ Buy Now</button>
+</div>
+
+<div class="product-card">
+<img src="Nose Ring.jpeg" onclick="openProduct('Nose Ring',3499,'Nose Ring.jpeg')" style="cursor:pointer;">
+<h3>Nose Ring</h3>
+<p>₹3,499</p>
+<button onclick="addToCart('Nose Ring',3499,'Nose Ring.jpeg')">Add To Cart</button>
+<button onclick="addToWishlist('Nose Ring',3499,'Nose Ring.jpeg')">❤️ Wishlist</button>
+<button onclick="buyNow('Nose Ring',3499,'Nose Ring.jpeg')">⚡ Buy Now</button>
+</div>
+
+<div class="product-card">
+<img src="Bajuband.jpeg" onclick="openProduct('Bajuband',8999,'Bajuband.jpeg')" style="cursor:pointer;">
+<h3>Bajuband</h3>
+<p>₹8,999</p>
+<button onclick="addToCart('Bajuband',8999,'Bajuband.jpeg')">Add To Cart</button>
+<button onclick="addToWishlist('Bajuband',8999,'Bajuband.jpeg')">❤️ Wishlist</button>
+<button onclick="buyNow('Bajuband',8999,'Bajuband.jpeg')">⚡ Buy Now</button>
+</div>
+
+<div class="product-card">
+<img src="Bangles.jpeg" onclick="openProduct('Bangles',6999,'Bangles.jpeg')" style="cursor:pointer;">
+<h3>Bangles</h3>
+<p>₹6,999</p>
+<button onclick="addToCart('Bangles',6999,'Bangles.jpeg')">Add To Cart</button>
+<button onclick="addToWishlist('Bangles',6999,'Bangles.jpeg')">❤️ Wishlist</button>
+<button onclick="buyNow('Bangles',6999,'Bangles.jpeg')">⚡ Buy Now</button>
+</div>
+
+<div class="product-card">
+<img src="Bangles1.jpeg" onclick="openProduct('Gold Bangles',12999,'Bangles1.jpeg')" style="cursor:pointer;">
+<h3>Gold Bangles</h3>
+<p>₹12,999</p>
+<button onclick="addToCart('Gold Bangles',12999,'Bangles1.jpeg')">Add To Cart</button>
+<button onclick="addToWishlist('Gold Bangles',12999,'Bangles1.jpeg')">❤️ Wishlist</button>
+<button onclick="buyNow('Gold Bangles',12999,'Bangles1.jpeg')">⚡ Buy Now</button>
+</div>
+
+<div class="product-card">
+<img src="Bangles2.jpeg" onclick="openProduct('Bridal Bangles',15999,'Bangles2.jpeg')" style="cursor:pointer;">
+<h3>Bridal Bangles</h3>
+<p>₹15,999</p>
+<button onclick="addToCart('Bridal Bangles',15999,'Bangles2.jpeg')">Add To Cart</button>
+<button onclick="addToWishlist('Bridal Bangles',15999,'Bangles2.jpeg')">❤️ Wishlist</button>
+<button onclick="buyNow('Bridal Bangles',15999,'Bangles2.jpeg')">⚡ Buy Now</button>
+</div>
+
+<div class="product-card">
+<img src="Bangles3.jpeg" onclick="openProduct('Designer Bangles',9999,'Bangles3.jpeg')" style="cursor:pointer;">
+<h3>Designer Bangles</h3>
+<p>₹9,999</p>
+<button onclick="addToCart('Designer Bangles',9999,'Bangles3.jpeg')">Add To Cart</button>
+<button onclick="addToWishlist('Designer Bangles',9999,'Bangles3.jpeg')">❤️ Wishlist</button>
+<button onclick="buyNow('Designer Bangles',9999,'Bangles3.jpeg')">⚡ Buy Now</button>
+</div>
+
+<div class="product-card">
+<img src="Bracelets.jpeg" onclick="openProduct('Bracelet',4999,'Bracelets.jpeg')" style="cursor:pointer;">
+<h3>Bracelet</h3>
+<p>₹4,999</p>
+<button onclick="addToCart('Bracelet',4999,'Bracelets.jpeg')">Add To Cart</button>
+<button onclick="addToWishlist('Bracelet',4999,'Bracelets.jpeg')">❤️ Wishlist</button>
+<button onclick="buyNow('Bracelet',4999,'Bracelets.jpeg')">⚡ Buy Now</button>
+</div>
+
+<div class="product-card">
+<img src="Ring.jpeg" onclick="openProduct('Ring',2999,'Ring.jpeg')" style="cursor:pointer;">
+<h3>Ring</h3>
+<p>₹2,999</p>
+<button onclick="addToCart('Ring',2999,'Ring.jpeg')">Add To Cart</button>
+<button onclick="addToWishlist('Ring',2999,'Ring.jpeg')">❤️ Wishlist</button>
+<button onclick="buyNow('Ring',2999,'Ring.jpeg')">⚡ Buy Now</button>
+</div>
+
+<div class="product-card">
+<img src="Ring1.jpeg" onclick="openProduct('Diamond Ring',18999,'Ring1.jpeg')" style="cursor:pointer;">
+<h3>Diamond Ring</h3>
+<p>₹18,999</p>
+<button onclick="addToCart('Diamond Ring',18999,'Ring1.jpeg')">Add To Cart</button>
+<button onclick="addToWishlist('Diamond Ring',18999,'Ring1.jpeg')">❤️ Wishlist</button>
+<button onclick="buyNow('Diamond Ring',18999,'Ring1.jpeg')">⚡ Buy Now</button>
+</div>
+
+<div class="product-card">
+<img src="Ring2.jpeg" onclick="openProduct('Gold Ring',12999,'Ring2.jpeg')" style="cursor:pointer;">
+<h3>Gold Ring</h3>
+<p>₹12,999</p>
+<button onclick="addToCart('Gold Ring',12999,'Ring2.jpeg')">Add To Cart</button>
+<button onclick="addToWishlist('Gold Ring',12999,'Ring2.jpeg')">❤️ Wishlist</button>
+<button onclick="buyNow('Gold Ring',12999,'Ring2.jpeg')">⚡ Buy Now</button>
+</div>
+
+<div class="product-card">
+<img src="Ring3.jpeg" onclick="openProduct('Designer Ring',8999,'Ring3.jpeg')" style="cursor:pointer;">
+<h3>Designer Ring</h3>
+<p>₹8,999</p>
+<button onclick="addToCart('Designer Ring',8999,'Ring3.jpeg')">Add To Cart</button>
+<button onclick="addToWishlist('Designer Ring',8999,'Ring3.jpeg')">❤️ Wishlist</button>
+<button onclick="buyNow('Designer Ring',8999,'Ring3.jpeg')">⚡ Buy Now</button>
+</div>
+
+<div class="product-card">
+<img src="Vaddanam.jpeg" onclick="openProduct('Vaddanam',24999,'Vaddanam.jpeg')" style="cursor:pointer;">
+<h3>Vaddanam</h3>
+<p>₹24,999</p>
+<button onclick="addToCart('Vaddanam',24999,'Vaddanam.jpeg')">Add To Cart</button>
+<button onclick="addToWishlist('Vaddanam',24999,'Vaddanam.jpeg')">❤️ Wishlist</button>
+<button onclick="buyNow('Vaddanam',24999,'Vaddanam.jpeg')">⚡ Buy Now</button>
+</div>
+
+<div class="product-card">
+<img src="Vaddanam1.jpeg" onclick="openProduct('Bridal Vaddanam',34999,'Vaddanam1.jpeg')" style="cursor:pointer;">
+<h3>Bridal Vaddanam</h3>
+<p>₹34,999</p>
+<button onclick="addToCart('Bridal Vaddanam',34999,'Vaddanam1.jpeg')">Add To Cart</button>
+<button onclick="addToWishlist('Bridal Vaddanam',34999,'Vaddanam1.jpeg')">❤️ Wishlist</button>
+<button onclick="buyNow('Bridal Vaddanam',34999,'Vaddanam1.jpeg')">⚡ Buy Now</button>
+</div>
+
+<div class="product-card">
+<img src="Anklet.jpeg" onclick="openProduct('Anklet',2999,'Anklet.jpeg')" style="cursor:pointer;">
+<h3>Anklet</h3>
+<p>₹2,999</p>
+<button onclick="addToCart('Anklet',2999,'Anklet.jpeg')">Add To Cart</button>
+<button onclick="addToWishlist('Anklet',2999,'Anklet.jpeg')">❤️ Wishlist</button>
+<button onclick="buyNow('Anklet',2999,'Anklet.jpeg')">⚡ Buy Now</button>
+</div>
+
+<div class="product-card">
+<img src="Anklet1.jpeg" onclick="openProduct('Silver Anklet',3999,'Anklet1.jpeg')" style="cursor:pointer;">
+<h3>Silver Anklet</h3>
+<p>₹3,999</p>
+<button onclick="addToCart('Silver Anklet',3999,'Anklet1.jpeg')">Add To Cart</button>
+<button onclick="addToWishlist('Silver Anklet',3999,'Anklet1.jpeg')">❤️ Wishlist</button>
+<button onclick="buyNow('Silver Anklet',3999,'Anklet1.jpeg')">⚡ Buy Now</button>
+</div>
+
+<div class="product-card">
+<img src="Anklet2.jpeg" onclick="openProduct('Designer Anklet',4999,'Anklet2.jpeg')" style="cursor:pointer;">
+<h3>Designer Anklet</h3>
+<p>₹4,999</p>
+<button onclick="addToCart('Designer Anklet',4999,'Anklet2.jpeg')">Add To Cart</button>
+<button onclick="addToWishlist('Designer Anklet',4999,'Anklet2.jpeg')">❤️ Wishlist</button>
+<button onclick="buyNow('Designer Anklet',4999,'Anklet2.jpeg')">⚡ Buy Now</button>
+</div>
+
+<div class="product-card">
+<img src="Toe Ring.jpeg" onclick="openProduct('Toe Ring',1999,'Toe Ring.jpeg')" style="cursor:pointer;">
+<h3>Toe Ring</h3>
+<p>₹1,999</p>
+<button onclick="addToCart('Toe Ring',1999,'Toe Ring.jpeg')">Add To Cart</button>
+<button onclick="addToWishlist('Toe Ring',1999,'Toe Ring.jpeg')">❤️ Wishlist</button>
+<button onclick="buyNow('Toe Ring',1999,'Toe Ring.jpeg')">⚡ Buy Now</button>
+</div>
+
+<div class="product-card">
+<img src="Toe Ring1.jpeg" onclick="openProduct('Silver Toe Ring',2499,'Toe Ring1.jpeg')" style="cursor:pointer;">
+<h3>Silver Toe Ring</h3>
+<p>₹2,499</p>
+<button onclick="addToCart('Silver Toe Ring',2499,'Toe Ring1.jpeg')">Add To Cart</button>
+<button onclick="addToWishlist('Silver Toe Ring',2499,'Toe Ring1.jpeg')">❤️ Wishlist</button>
+<button onclick="buyNow('Silver Toe Ring',2499,'Toe Ring1.jpeg')">⚡ Buy Now</button>
+</div>
+
+</section>
+
+
+<!-- MEN PRODUCTS -->
+
+<section id="menProducts" class="products" style="display:none;">
+
+<div class="product-card">
+<img src="Everyday Chains.jpeg" onclick="openProduct('Everyday Chain',5999,'Everyday Chains.jpeg')" style="cursor:pointer;">
+<h3>Everyday Chain</h3>
+<p>₹5,999</p>
+<button onclick="addToCart('Everyday Chain',5999,'Everyday Chains.jpeg')">Add To Cart</button>
+<button onclick="addToWishlist('Everyday Chain',5999,'Everyday Chains.jpeg')">❤️ Wishlist</button>
+<button onclick="buyNow('Everyday Chain',5999,'Everyday Chains.jpeg')">⚡ Buy Now</button>
+</div>
+
+<div class="product-card">
+<img src="Everyday Chains1.jpeg" onclick="openProduct('Gold Chain',12999,'Everyday Chains1.jpeg')" style="cursor:pointer;">
+<h3>Gold Chain</h3>
+<p>₹12,999</p>
+<button onclick="addToCart('Gold Chain',12999,'Everyday Chains1.jpeg')">Add To Cart</button>
+<button onclick="addToWishlist('Gold Chain',12999,'Everyday Chains1.jpeg')">❤️ Wishlist</button>
+<button onclick="buyNow('Gold Chain',12999,'Everyday Chains1.jpeg')">⚡ Buy Now</button>
+</div>
+
+<div class="product-card">
+<img src="Everyday Chains2.jpeg" onclick="openProduct('Designer Chain',9999,'Everyday Chains2.jpeg')" style="cursor:pointer;">
+<h3>Designer Chain</h3>
+<p>₹9,999</p>
+<button onclick="addToCart('Designer Chain',9999,'Everyday Chains2.jpeg')">Add To Cart</button>
+<button onclick="addToWishlist('Designer Chain',9999,'Everyday Chains2.jpeg')">❤️ Wishlist</button>
+<button onclick="buyNow('Designer Chain',9999,'Everyday Chains2.jpeg')">⚡ Buy Now</button>
+</div>
+
+<div class="product-card">
+<img src="Pendant Necklaces.jpeg" onclick="openProduct('Pendant Necklace',7999,'Pendant Necklaces.jpeg')" style="cursor:pointer;">
+<h3>Pendant Necklace</h3>
+<p>₹7,999</p>
+<button onclick="addToCart('Pendant Necklace',7999,'Pendant Necklaces.jpeg')">Add To Cart</button>
+<button onclick="addToWishlist('Pendant Necklace',7999,'Pendant Necklaces.jpeg')">❤️ Wishlist</button>
+<button onclick="buyNow('Pendant Necklace',7999,'Pendant Necklaces.jpeg')">⚡ Buy Now</button>
+</div>
+
+<div class="product-card">
+<img src="Pendant Necklaces1.jpeg" onclick="openProduct('Gold Pendant Necklace',9999,'Pendant Necklaces1.jpeg')" style="cursor:pointer;">
+<h3>Gold Pendant Necklace</h3>
+<p>₹9,999</p>
+<button onclick="addToCart('Gold Pendant Necklace',9999,'Pendant Necklaces1.jpeg')">Add To Cart</button>
+<button onclick="addToWishlist('Gold Pendant Necklace',9999,'Pendant Necklaces1.jpeg')">❤️ Wishlist</button>
+<button onclick="buyNow('Gold Pendant Necklace',9999,'Pendant Necklaces1.jpeg')">⚡ Buy Now</button>
+</div>
+
+<div class="product-card">
+<img src="Pendant Necklaces2.jpeg" onclick="openProduct('Designer Pendant Necklace',11999,'Pendant Necklaces2.jpeg')" style="cursor:pointer;">
+<h3>Designer Pendant Necklace</h3>
+<p>₹11,999</p>
+<button onclick="addToCart('Designer Pendant Necklace',11999,'Pendant Necklaces2.jpeg')">Add To Cart</button>
+<button onclick="addToWishlist('Designer Pendant Necklace',11999,'Pendant Necklaces2.jpeg')">❤️ Wishlist</button>
+<button onclick="buyNow('Designer Pendant Necklace',11999,'Pendant Necklaces2.jpeg')">⚡ Buy Now</button>
+</div>
+
+<div class="product-card">
+<img src="Brooch.jpeg" onclick="openProduct('Brooch',3999,'Brooch.jpeg')" style="cursor:pointer;">
+<h3>Brooch</h3>
+<p>₹3,999</p>
+<button onclick="addToCart('Brooch',3999,'Brooch.jpeg')">Add To Cart</button>
+<button onclick="addToWishlist('Brooch',3999,'Brooch.jpeg')">❤️ Wishlist</button>
+<button onclick="buyNow('Brooch',3999,'Brooch.jpeg')">⚡ Buy Now</button>
+</div>
+
+<div class="product-card">
+<img src="Brooch1.jpeg" onclick="openProduct('RoyaL Brooch',4999,'Brooch1.jpeg')" style="cursor:pointer;">
+<h3>Royal Brooch</h3>
+<p>₹4,999</p>
+<button onclick="addToCart('Royal Brooch',4999,'Brooch1.jpeg')">Add To Cart</button>
+<button onclick="addToWishlist('Royal Brooch',4999,'Brooch1.jpeg')">❤️ Wishlist</button>
+<button onclick="buyNow('Royal Brooch',4999,'Brooch1.jpeg')">⚡ Buy Now</button>
+</div>
+
+<div class="product-card">
+<img src="Brooch2.jpeg" onclick="openProduct('Designer Brooch',5999,'Brooch2.jpeg')" style="cursor:pointer;">
+<h3>Designer Brooch</h3>
+<p>₹5,999</p>
+<button onclick="addToCart('Designer Brooch',5999,'Brooch2.jpeg')">Add To Cart</button>
+<button onclick="addToWishlist('Designer Brooch',5999,'Brooch2.jpeg')">❤️ Wishlist</button>
+<button onclick="buyNow('Designer Brooch',5999,'Brooch2.jpeg')">⚡ Buy Now</button>
+</div>
+
+<div class="product-card">
+<img src="sleekcuff.jpeg" onclick="openProduct('Sleek Cuff',6999,'sleekcuff.jpeg')" style="cursor:pointer;">
+<h3>Sleek Cuff</h3>
+<p>₹6,999</p>
+<button onclick="addToCart('Sleek Cuff',6999,'sleekcuff.jpeg')">Add To Cart</button>
+<button onclick="addToWishlist('Sleek Cuff',6999,'sleekcuff.jpeg')">❤️ Wishlist</button>
+<button onclick="buyNow('Sleek Cuff',6999,'sleekcuff.jpeg')">⚡ Buy Now</button>
+</div>
+
+<div class="product-card">
+<img src="Link Bracelets.jpeg" onclick="openProduct('Link Bracelet',5999,'Link Bracelets.jpeg')" style="cursor:pointer;">
+<h3>Link Bracelet</h3>
+<p>₹5,999</p>
+<button onclick="addToCart('Link Bracelet',5999,'Link Bracelets.jpeg')">Add To Cart</button>
+<button onclick="addToWishlist('Link Bracelet',5999,'Link Bracelets.jpeg')">❤️ Wishlist</button>
+<button onclick="buyNow('Link Bracelet',5999,'Link Bracelets.jpeg')">⚡ Buy Now</button>
+</div>
+
+<div class="product-card">
+<img src="Link Bracelets1.jpeg" onclick="openProduct('Gold Link Bracelet',7999,'Link Bracelets1.jpeg')" style="cursor:pointer;">
+<h3>Gold Link Bracelet</h3>
+<p>₹7,999</p>
+<button onclick="addToCart('Gold Link Bracelet',7999,'Link Bracelets1.jpeg')">Add To Cart</button>
+<button onclick="addToWishlist('Gold Link Bracelet',7999,'Link Bracelets1.jpeg')">❤️ Wishlist</button>
+<button onclick="buyNow('Gold Link Bracelet',7999,'Link Bracelets1.jpeg')">⚡ Buy Now</button>
+</div>
+
+<div class="product-card">
+<img src="Beaded Bracelets.jpeg" onclick="openProduct('Beaded Bracelet',4999,'Beaded Bracelets.jpeg')" style="cursor:pointer;">
+<h3>Beaded Bracelet</h3>
+<p>₹4,999</p>
+<button onclick="addToCart('Beaded Bracelet',4999,'Beaded Bracelets.jpeg')">Add To Cart</button>
+<button onclick="addToWishlist('Beaded Bracelet',4999,'Beaded Bracelets.jpeg')">❤️ Wishlist</button>
+<button onclick="buyNow('Beaded Bracelet',4999,'Beaded Bracelets.jpeg')">⚡ Buy Now</button>
+</div>
+
+<div class="product-card">
+<img src="Beaded Bracelets1.jpeg" onclick="openProduct('Designer Beaded Bracelet',6999,'Beaded Bracelets1.jpeg')" style="cursor:pointer;">
+<h3>Designer Beaded Bracelet</h3>
+<p>₹6,999</p>
+<button onclick="addToCart('Designer Beaded Bracelet',6999,'Beaded Bracelets1.jpeg')">Add To Cart</button>
+<button onclick="addToWishlist('Designer Beaded Bracelet',6999,'Beaded Bracelets1.jpeg')">❤️ Wishlist</button>
+<button onclick="buyNow('Designer Beaded Bracelet',6999,'Beaded Bracelets1.jpeg')">⚡ Buy Now</button>
+</div>
+
+<div class="product-card">
+<img src="sleekband.jpeg" onclick="openProduct('Sleek Band',3999,'sleekband.jpeg')" style="cursor:pointer;">
+<h3>Sleek Band</h3>
+<p>₹3,999</p>
+<button onclick="addToCart('Sleek Band',3999,'sleekband.jpeg')">Add To Cart</button>
+<button onclick="addToWishlist('Sleek Band',3999,'sleekband.jpeg')">❤️ Wishlist</button>
+<button onclick="buyNow('Sleek Band',3999,'sleekband.jpeg')">⚡ Buy Now</button>
+</div>
+
+
+<div class="product-card">
+<img src="Waist Chains.jpeg" onclick="openProduct('Waist Chain',8999,'Waist Chains.jpeg')" style="cursor:pointer;">
+<h3>Waist Chain</h3>
+<p>₹8,999</p>
+<button onclick="addToCart('Waist Chain',8999,'Waist Chains.jpeg')">Add To Cart</button>
+<button onclick="addToWishlist('Waist Chain',8999,'Waist Chains.jpeg')">❤️ Wishlist</button>
+<button onclick="buyNow('Waist Chain',8999,'Waist Chains.jpeg')">⚡ Buy Now</button>
+</div>
+
+<div class="product-card">
+<img src="rolex watch.jpeg" onclick="openProduct('Rolex Watch',49999,'rolex watch.jpeg')" style="cursor:pointer;">
+<h3>Rolex Watch</h3>
+<p>₹49,999</p>
+<button onclick="addToCart('Rolex Watch',49999,'rolex watch.jpeg')">Add To Cart</button>
+<button onclick="addToWishlist('Rolex Watch',49999,'rolex watch.jpeg')">❤️ Wishlist</button>
+<button onclick="buyNow('Rolex Watch',49999,'rolex watch.jpeg')">⚡ Buy Now</button>
+</div>
+
+<div class="product-card">
+<img src="watch.jpeg" onclick="openProduct('Luxury Watch',24999,'watch.jpeg')" style="cursor:pointer;">
+<h3>Luxury Watch</h3>
+<p>₹24,999</p>
+<button onclick="addToCart('Luxury Watch',24999,'watch.jpeg')">Add To Cart</button>
+<button onclick="addToWishlist('Luxury Watch',24999,'watch.jpeg')">❤️ Wishlist</button>
+<button onclick="buyNow('Luxury Watch',24999,'watch.jpeg')">⚡ Buy Now</button>
+</div>
+
+<div class="product-card">
+<img src="titan watch.jpeg"
+onclick="openProduct('Titan Watch',14999,'titan watch.jpeg')"
+style="cursor:pointer;">
+<h3>Titan Watch</h3>
+<p>₹14,999</p>
+<button onclick="addToCart('Titan Watch',14999,'titan watch.jpeg')">Add To Cart</button>
+<button onclick="addToWishlist('Titan Watch',14999,'titan watch.jpeg')">❤️ Wishlist</button>
+<button onclick="buyNow('Titan Watch',14999,'titan watch.jpeg')">⚡ Buy Now</button>
+</div>
+
+<div class="product-card">
+<img src="carliton_watch.jpeg" onclick="openProduct('Carlton Watch',18999,'carliton_watch.jpeg')" style="cursor:pointer;">
+<h3>Carlton Watch</h3>
+<p>₹18,999</p>
+<button onclick="addToCart('Carlton Watch',18999,'carliton_watch.jpeg')">Add To Cart</button>
+<button onclick="addToWishlist('Carlton Watch',18999,'carliton_watch.jpeg')">❤️ Wishlist</button>
+<button onclick="buyNow('Carlton Watch',18999,'carliton_watch.jpeg')">⚡ Buy Now</button>
+</div>  
+
+</section>
+    <!-- BOTTOM NAV -->
+
+   <nav class="bottom-nav">
+
+<a href="home.html">
+<i class="bi bi-house-fill"></i>
+<span>Home</span>
+</a>
+<a href="cart.html">
+<i class="bi bi-cart-fill"></i>
+<span>Cart</span>
+</a>
+
+<a href="myorders.html">
+<i class="bi bi-box-seam"></i>
+<span>Orders</span>
+</a>
+
+<a href="profile.html">
+<i class="bi bi-person-fill"></i>
+<span>Profile</span>
+</a>
+
+</nav>
+    <script src="home.js?v=20260624-admin-display"></script>
+
+</body>
+</html>
