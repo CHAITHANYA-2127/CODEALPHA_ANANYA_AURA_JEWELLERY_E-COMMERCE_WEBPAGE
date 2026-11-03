@@ -106,8 +106,16 @@ function addToCart(name, price, image, productId, category, description) {
             alert(name + " Added To Cart Successfully!");
         })
         .catch(error => {
-            console.log(error);
-            alert("Server Error");
+            console.log("Cart fallback:", error);
+            cart.push({
+                name: name,
+                price: Number(price),
+                image: image,
+                qty: 1
+            });
+            localStorage.setItem("cart", JSON.stringify(cart));
+            refreshUserCounts();
+            alert(name + " Added To Cart Successfully!");
         });
 }
 
@@ -144,8 +152,15 @@ function addToWishlist(name, price, image, productId, category, description) {
             refreshUserCounts();
         })
         .catch(error => {
-            console.log(error);
-            alert("Server Error");
+            console.log("Wishlist fallback:", error);
+            wishlist = JSON.parse(localStorage.getItem(wishlistStorageKey())) || [];
+            if (!wishlist.some(item => item.name === name)) {
+                wishlist.push({ name: name, price: Number(price), image: image });
+                localStorage.setItem(wishlistStorageKey(), JSON.stringify(wishlist));
+                localStorage.setItem("wishlist", JSON.stringify(wishlist));
+            }
+            refreshUserCounts();
+            alert(name + " Added To Wishlist!");
         });
 }
 
