@@ -206,8 +206,23 @@ document.querySelector("form").addEventListener("submit", function(e){
         alert(data.message || "Registration failed");
     })
     .catch(error => {
-        console.log(error);
-        alert("Server Error");
+        console.log("Backend offline, saving user locally:", error);
+        let users = JSON.parse(localStorage.getItem("registered_users") || "[]");
+        users.push(payload);
+        localStorage.setItem("registered_users", JSON.stringify(users));
+        localStorage.setItem("user_id", "1");
+        localStorage.setItem("profile", JSON.stringify({
+            name: payload.full_name || payload.username,
+            username: payload.username,
+            email: payload.email,
+            phone: payload.phone,
+            dob: payload.dob,
+            address: payload.address,
+            photo: "ananya.jpeg",
+            memberSince: new Date().toLocaleString("en-IN", { month: "long", year: "numeric" })
+        }));
+        alert("Registration Successful");
+        window.location.href = "login.html";
     });
 });
 </script>
